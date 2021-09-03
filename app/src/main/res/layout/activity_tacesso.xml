@@ -28,7 +28,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+
     </LinearLayout>
+
+    <include
+        layout="@layout/back_tacesso"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -38,9 +44,6 @@
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/drawer_menu" />
 
-    <include
-        layout="@layout/back_tacesso"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

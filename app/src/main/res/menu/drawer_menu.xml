@@ -8,11 +8,11 @@
             android:icon="@android:drawable/ic_menu_search"
             android:title="@string/btn_track" />
         <item
-            android:id="@+id/nav_envie"
+            android:id="@+id/nav_registre"
             android:icon="@android:drawable/ic_menu_edit"
-            android:title="@string/btn_track" />
+            android:title="@string/btn_register" />
         <item
-            android:id="@+id/nav_calcula"
+            android:id="@+id/nav_frete"
             android:icon="@android:drawable/ic_menu_mapmode"
             android:title="@string/btn_freight" />
     </group>

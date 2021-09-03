@@ -10,4 +10,5 @@
     <string name="btn_freight">Calcule seu frete !</string>
     <string name="btn_mais">Saiba Mais !</string>
     <string name="btn_contato">Entre em Contato !</string>
+    <string name="inic">"Bem vindo ao aplicativo !"</string>
 </resources>
