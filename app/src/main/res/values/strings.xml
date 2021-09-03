@@ -2,5 +2,7 @@
     <string name="app_name">Transportadora</string>
     <string name="logo">Caminhão</string>
     <string name="btn_1">Entre aqui !</string>
-    <string name="btn_2">Visite o site 1</string>
+    <string name="btn_2">Visite o site !</string>
+    <string name="nav_open">Abrir menu lateral !</string>
+    <string name="nav_close">Fechar menu lateral !</string>
 </resources>

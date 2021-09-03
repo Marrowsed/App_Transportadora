@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_rastreio"
+            android:icon="@android:drawable/ic_menu_search"
+            android:title="Rastreie sua encomenda !" />
+        <item
+            android:id="@+id/nav_envie"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="Registre sua encomenda !" />
+        <item
+            android:id="@+id/nav_calcula"
+            android:icon="@android:drawable/ic_menu_mapmode"
+            android:title="Calcule seu frete !" />
+    </group>
+
+    <item android:title="Extra">
+        <menu>
+            <item
+                android:id="@+id/nav_mais"
+                android:icon="@android:drawable/ic_menu_add"
+                android:title="Saiba mais !" />
+            <item
+                android:id="@+id/nav_contato"
+                android:icon="@android:drawable/ic_dialog_email"
+                android:title="Entre em contato !" />
+        </menu>
+    </item>
+</menu>

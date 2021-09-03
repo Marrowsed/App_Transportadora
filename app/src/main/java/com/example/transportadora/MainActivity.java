@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Link for your website - Link para o site da empresa
         b2.setOnClickListener(v -> {
-            String url = "https://www.google.com/search?q=cadastre+sua+empresa&client=firefox-b-d&ei=dE0xYcmaGpq85OUPyr-nwAs&oq=cadastre+sua+empresa&gs_lcp=Cgdnd3Mtd2l6EAMyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgYIABAWEB4yBggAEBYQHjIGCAAQFhAeMgYIABAWEB4yBggAEBYQHjIGCAAQFhAeOgcIABBHELADOgcIABCwAxBDOhMILhCxAxCDARDHARCjAhBDEJMCOgsIABCABBCxAxCDAToKCAAQsQMQgwEQQzoLCC4QgAQQsQMQgwE6EQguEIAEELEDEIMBEMcBEKMCOg4ILhCABBCxAxDHARCjAjoFCC4QgAQ6BAgAEEM6CAgAEIAEELEDOhEILhCABBCxAxCDARDHARCvAToICC4QsQMQgwE6DgguEIAEELEDEMcBEK8BOg4ILhCxAxCDARDHARCvAToLCC4QgAQQxwEQrwE6DgguEIAEELEDEMcBENEDOg0ILhCxAxDHARCjAhBDOgcIABCxAxBDOgQILhBDOgsIABCxAxCDARDJAzoHCAAQgAQQCkoECEEYAFCaIljaP2DwQGgDcAJ4AIABgAGIAaESkgEENy4xNZgBAKABAcgBCcABAQ&sclient=gws-wiz&ved=0ahUKEwjJpPfgqOHyAhUaHrkGHcrfCbgQ4dUDCA0&uact=5";
+            String url = "https://www.google.com/search?client=firefox-b-d&q=android+studio";
             Intent j = new Intent(Intent.ACTION_VIEW);
             j.setData(Uri.parse(url));
             startActivity(j);
