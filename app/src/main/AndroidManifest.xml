@@ -11,13 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Transportadora">
         <activity
+            android:name=".Ajuda"
+            android:exported="true" />
+        <activity
             android:name=".TAcesso"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

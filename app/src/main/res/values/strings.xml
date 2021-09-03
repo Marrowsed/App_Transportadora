@@ -5,4 +5,9 @@
     <string name="btn_2">Visite o site !</string>
     <string name="nav_open">Abrir menu lateral !</string>
     <string name="nav_close">Fechar menu lateral !</string>
+    <string name="btn_track">Rastreie sua encomenda !</string>
+    <string name="btn_register">Registre sua encomenda !</string>
+    <string name="btn_freight">Calcule seu frete !</string>
+    <string name="btn_mais">Saiba Mais !</string>
+    <string name="btn_contato">Entre em Contato !</string>
 </resources>

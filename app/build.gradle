@@ -3,10 +3,9 @@ plugins {
     id 'com.chrisney.enigma'
 }
 //Enigma Plugin
-enigma.enabled = true
-enigma.injectFakeKeys = true
-enigma.ignoredClasses = ["com.example.transportadora.MainActivity.java"]
-enigma.ignoredClasses = ["com.example.transportadora.TAcesso.java"]
+enigma.enabled = false
+enigma.injectFakeKeys = false
+
 
 
 

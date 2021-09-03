@@ -6,27 +6,27 @@
         <item
             android:id="@+id/nav_rastreio"
             android:icon="@android:drawable/ic_menu_search"
-            android:title="Rastreie sua encomenda !" />
+            android:title="@string/btn_track" />
         <item
             android:id="@+id/nav_envie"
             android:icon="@android:drawable/ic_menu_edit"
-            android:title="Registre sua encomenda !" />
+            android:title="@string/btn_track" />
         <item
             android:id="@+id/nav_calcula"
             android:icon="@android:drawable/ic_menu_mapmode"
-            android:title="Calcule seu frete !" />
+            android:title="@string/btn_freight" />
     </group>
 
-    <item android:title="Extra">
+    <item android:title="Empresa">
         <menu>
             <item
                 android:id="@+id/nav_mais"
                 android:icon="@android:drawable/ic_menu_add"
-                android:title="Saiba mais !" />
+                android:title="@string/btn_mais" />
             <item
                 android:id="@+id/nav_contato"
                 android:icon="@android:drawable/ic_dialog_email"
-                android:title="Entre em contato !" />
+                android:title="@string/btn_contato" />
         </menu>
     </item>
 </menu>
