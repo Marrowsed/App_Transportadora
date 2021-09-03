@@ -5,3 +5,5 @@
 <h2>APP Transportadora</h2>
 
 <p>Esse APP é feito para qualquer transportadora que está começando a sua aventura ! Possui os recursos principais para seus clientes ! Só é necessário adaptar as chamadas da API para sua empresa e deixar rolar ! Divirta-se ! </p>
+
+<h2>Made by ®Marrows®</h2>
