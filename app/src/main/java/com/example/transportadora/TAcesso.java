@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -23,7 +22,7 @@ public class TAcesso extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
-    Button b1, b2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +71,7 @@ public class TAcesso extends AppCompatActivity
     //Navigation implements - Implementação da navegação pelo menu
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.nav_rastreio:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new Fragmento_Rastreio()).commit();
@@ -85,25 +84,22 @@ public class TAcesso extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new Fragmento_Frete()).commit();
                 break;
-            /*case R.id.nav_mais:
-                b1.setOnClickListener(v -> {
+            case R.id.nav_mais:
                     String url = "https://www.google.com/search?client=firefox-b-d&q=saiba+mais"; //Link temporário para sua empresa
                     Intent i = new Intent(Intent.ACTION_VIEW);
                     i.setData(Uri.parse(url));
                     startActivity(i);
-                });
                 break;
             case R.id.nav_contato:
-                b2.setOnClickListener(v -> {
-                    String url = "https://www.google.com/search?client=firefox-b-d&q=contato"; //Link temporário de contato
+                    String url2 = "https://www.google.com/search?client=firefox-b-d&q=contato"; //Link temporário de contato
                     Intent j = new Intent(Intent.ACTION_VIEW);
-                    j.setData(Uri.parse(url));
+                    j.setData(Uri.parse(url2));
                     startActivity(j);
-                });
-                break;*/
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
