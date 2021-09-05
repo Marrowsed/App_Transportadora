@@ -13,6 +13,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.transportadora.fragmentos.Fragmento_Frete;
+import com.example.transportadora.fragmentos.Fragmento_Home;
+import com.example.transportadora.fragmentos.Fragmento_Rastreio;
+import com.example.transportadora.fragmentos.Fragmento_Registra;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 

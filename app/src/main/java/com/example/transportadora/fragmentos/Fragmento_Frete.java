@@ -1,4 +1,4 @@
-package com.example.transportadora;
+package com.example.transportadora.fragmentos;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,11 +8,13 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class Fragmento_Rastreio extends Fragment {
+import com.example.transportadora.R;
+
+public class Fragmento_Frete extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragmento_rastreio, container, false);
+        return inflater.inflate(R.layout.fragmento_frete, container, false);
     }
 }
