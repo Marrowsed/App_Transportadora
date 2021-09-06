@@ -1,6 +1,7 @@
 package com.example.transportadora;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,11 @@ public class Ajuda extends AppCompatActivity {
             Intent it = new Intent(Ajuda.this, TAcesso.class);
             startActivity(it);
         });
+
+        //Barra de cima
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Ajuda"); // Name of your Toolbar - Nome da sua Barra de cima
 
 
     }
