@@ -16,14 +16,14 @@ public class Ajuda extends AppCompatActivity {
         setContentView(R.layout.activity_ajuda);
 
         //Home button - Botão Home
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab2);
         fab.setOnClickListener(view -> {
             Intent it = new Intent(Ajuda.this, TAcesso.class);
             startActivity(it);
         });
 
         //Barra de cima
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_ajuda);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Ajuda"); // Name of your Toolbar - Nome da sua Barra de cima
 

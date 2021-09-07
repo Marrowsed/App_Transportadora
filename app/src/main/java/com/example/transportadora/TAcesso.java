@@ -34,7 +34,7 @@ public class TAcesso extends AppCompatActivity
         setContentView(R.layout.activity_tacesso);
 
         //Barra de cima
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_tacesso);
         setSupportActionBar(toolbar);
 
         //Help button - Botão de Ajuda
@@ -45,10 +45,10 @@ public class TAcesso extends AppCompatActivity
         });
 
         //Menu lateral
-        drawer = findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout_tacesso);
 
         //Navegação pelo menu
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view_tacesso);
         navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.nav_open, R.string.nav_close);
@@ -56,7 +56,7 @@ public class TAcesso extends AppCompatActivity
         toggle.syncState();
 
         if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_tacesso,
                     new Fragmento_Home()).commit();
         }
 
@@ -77,15 +77,15 @@ public class TAcesso extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_rastreio:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_tacesso,
                         new Fragmento_Rastreio()).commit();
                 break;
             case R.id.nav_registre:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_tacesso,
                         new Fragmento_Registra()).commit();
                 break;
             case R.id.nav_frete:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_tacesso,
                         new Fragmento_Frete()).commit();
                 break;
             case R.id.nav_mais:

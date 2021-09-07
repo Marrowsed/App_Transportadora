@@ -12,7 +12,8 @@
         android:theme="@style/Theme.Transportadora">
         <activity
             android:name=".TLogin"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".Ajuda"
             android:exported="true"

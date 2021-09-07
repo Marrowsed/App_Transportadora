@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Registered users button - Botão para usuários cadastrados
         b1.setOnClickListener(v -> {
-            Intent i = new Intent(MainActivity.this, TAcesso.class);
+            Intent i = new Intent(MainActivity.this, TLogin.class);
             startActivity(i);
         });
 
