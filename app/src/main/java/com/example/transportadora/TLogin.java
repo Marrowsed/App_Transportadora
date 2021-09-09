@@ -47,6 +47,7 @@ public class TLogin extends AppCompatActivity
                     Toast.makeText(TLogin.this, "Por favor, digite todos os campos", Toast.LENGTH_SHORT).show();
                 } else{
                     isUser(usuario, senha);
+                    isRight(usuario, senha);
                 }
             }
         });
@@ -96,17 +97,26 @@ public class TLogin extends AppCompatActivity
         return true;
         }
 
-        public void isUser(String user, String pass){
-                Boolean checa = BD.isUser(user, pass);
-                if(checa == false) {
-                    Boolean inserir = BD.inserirDados(user, pass);
-                        if (inserir == true){
-                            Toast.makeText(TLogin.this, "Cadastro criado com sucesso", Toast.LENGTH_SHORT).show();
-                        }
+        public void isUser(String user, String pass) {
+            Boolean checa = BD.isUser(user, pass);
+            if (checa == false) {
+                Boolean inserir = BD.inserirDados(user, pass);
+                if (inserir == true) {
+                    Toast.makeText(TLogin.this, "Cadastro criado com sucesso", Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent it = new Intent(TLogin.this, TAcesso.class);
-                    Toast.makeText(TLogin.this,"Acesso permitido", Toast.LENGTH_SHORT).show();
-                    startActivity(it);
+                    Toast.makeText(TLogin.this, "Cadastro já existente !", Toast.LENGTH_SHORT).show();
                 }
             }
+        }
+
+        public void isRight(String user, String pass) {
+                Boolean checa = BD.isUser(user, pass);
+                if (checa == false) {
+                    Toast.makeText(TLogin.this, "Credenciais inválidas !", Toast.LENGTH_SHORT).show();
+                } else{
+                Intent it = new Intent(TLogin.this, TAcesso.class);
+                Toast.makeText(TLogin.this,"Acesso permitido", Toast.LENGTH_SHORT).show();
+                startActivity(it);
+            }
+        }
 }
