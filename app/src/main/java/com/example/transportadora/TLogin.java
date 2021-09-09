@@ -46,8 +46,7 @@ public class TLogin extends AppCompatActivity
                 if(usuario.equals("") || senha.equals("")){
                     Toast.makeText(TLogin.this, "Por favor, digite todos os campos", Toast.LENGTH_SHORT).show();
                 } else{
-                    isUser(usuario, senha);
-                    isRight(usuario, senha);
+                        isRight(usuario, senha);
                 }
             }
         });
@@ -110,12 +109,13 @@ public class TLogin extends AppCompatActivity
         }
 
         public void isRight(String user, String pass) {
-                Boolean checa = BD.isUser(user, pass);
-                if (checa == false) {
-                    Toast.makeText(TLogin.this, "Credenciais inválidas !", Toast.LENGTH_SHORT).show();
-                } else{
+            isUser(user, pass);
+            Boolean checa = BD.isUser(user, pass);
+            if (checa == false) {
+                Toast.makeText(TLogin.this, "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
+            } else {
                 Intent it = new Intent(TLogin.this, TAcesso.class);
-                Toast.makeText(TLogin.this,"Acesso permitido", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TLogin.this, "Acesso permitido", Toast.LENGTH_SHORT).show();
                 startActivity(it);
             }
         }
