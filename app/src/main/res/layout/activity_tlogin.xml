@@ -8,8 +8,8 @@
     android:fitsSystemWindows="true"
     android:gravity="center"
     android:orientation="vertical"
-    tools:openDrawer="start"
-    tools:context=".TLogin">
+    tools:context=".TLogin"
+    tools:openDrawer="start">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,48 +25,17 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/Theme.AppCompat.Light" />
 
+        <FrameLayout
+            android:id="@+id/fragment_container_tlogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
     </LinearLayout>
 
-    <LinearLayout
+    <include
+        layout="@layout/cont_back_tlogin"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Transportadora"
-            android:textSize="32sp"/>
-
-        <EditText
-            android:id="@+id/edt_user"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="16dp"
-            android:hint="Digite seu usuário"
-            android:inputType="text"
-            android:textSize="22sp"/>
-
-        <EditText
-            android:id="@+id/edt_pass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="28dp"
-            android:inputType="textPassword"
-            android:hint="Digite sua senha"
-            android:textSize="22sp"/>
-
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="128dp"
-            android:layout_height="wrap_content"
-            android:text="FAÇA LOGIN"/>
-
-    </LinearLayout>
-
+        android:layout_height="match_parent" />
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view_tlogin"
@@ -75,5 +44,6 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/drawer_menu_login" />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

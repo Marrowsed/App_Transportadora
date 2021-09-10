@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -22,7 +21,7 @@ import com.google.android.material.navigation.NavigationView;
 public class TLogin extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-    Button login;
+    Button login, cadastrar, rastrear;
     EditText user, pass;
     private DrawerLayout drawer;
     ManipulaDB BD;
@@ -35,6 +34,8 @@ public class TLogin extends AppCompatActivity
         login = findViewById(R.id.btn_login);
         user = findViewById(R.id.edt_user);
         pass = findViewById(R.id.edt_pass);
+        cadastrar = findViewById(R.id.btn_forgot);
+        rastrear = findViewById(R.id.btn_track);
         BD = new ManipulaDB(this);
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +49,14 @@ public class TLogin extends AppCompatActivity
                 } else{
                         isRight(usuario, senha);
                 }
+            }
+        });
+
+        cadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(TLogin.this, TCadastra.class);
+                startActivity(it);
             }
         });
 
@@ -90,6 +99,10 @@ public class TLogin extends AppCompatActivity
                 Intent j = new Intent(Intent.ACTION_VIEW);
                 j.setData(Uri.parse(url2));
                 startActivity(j);
+                break;
+            case R.id.nav_forgot:
+                Intent it = new Intent(TLogin.this, TCadastra.class);
+                startActivity(it);
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
