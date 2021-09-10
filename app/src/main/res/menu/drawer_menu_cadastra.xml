@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Empresa">
+        <menu>
+            <item
+                android:id="@+id/nav_mais"
+                android:icon="@android:drawable/ic_menu_add"
+                android:title="@string/btn_mais" />
+            <item
+                android:id="@+id/nav_contato"
+                android:icon="@android:drawable/ic_dialog_email"
+                android:title="@string/btn_contato" />
+        </menu>
+    </item>
+</menu>
