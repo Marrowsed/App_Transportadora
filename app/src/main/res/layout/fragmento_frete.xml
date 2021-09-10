@@ -7,36 +7,64 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="80dp">
+
+        <EditText
+            android:id="@+id/cepo"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="CEP ORIGEM"
+            android:gravity="center"
+            android:inputType="textPostalAddress"/>
+
+        <EditText
+            android:id="@+id/cepd"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="CEP DESTINO"
+            android:gravity="center"
+            android:inputType="textPostalAddress"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
         android:layout_marginBottom="100sp">
 
         <EditText
             android:id="@+id/dim1"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:hint="Digite a Altura"
+            android:hint="Altura"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:inputType="numberDecimal"/>
 
         <EditText
             android:id="@+id/dim2"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:hint="Digite a Largura"
+            android:hint="Largura"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:inputType="numberDecimal"/>
 
         <EditText
             android:id="@+id/dim3"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:hint="Digite a Profundidade"
+            android:hint="Profundidade"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:inputType="numberDecimal"/>
 
     </LinearLayout>
 
@@ -54,7 +82,8 @@
             android:layout_marginBottom="20dp"
             android:gravity="center"
             android:layout_marginLeft="20dp"
-            android:hint="Digite o Peso" />
+            android:hint="Digite o Peso"
+            android:inputType="numberDecimal"/>
 
         <EditText
             android:id="@+id/pesoc"
@@ -86,14 +115,15 @@
 
         <EditText
             android:id="@+id/valor"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="20dp"
             android:focusable="false"
             android:gravity="center"
             android:text="Valor do Frete"
-            android:inputType="none" />
+            android:inputType="none"
+            android:layout_marginLeft="130dp"/>
 
     </LinearLayout>
 

@@ -15,7 +15,7 @@ import com.example.transportadora.R;
 
 public class Fragmento_Frete extends Fragment {
 
-    EditText d1, d2, d3, peso, valor, pesoc;
+    EditText d1, d2, d3, peso, valor, pesoc, cepo, cepd;
     Button calcula;
 
     @Nullable
@@ -33,6 +33,8 @@ public class Fragmento_Frete extends Fragment {
         pesoc = getView().findViewById(R.id.pesoc);
         valor = getView().findViewById(R.id.valor);
         calcula = getView().findViewById(R.id.btn_calc);
+        cepo = getView().findViewById(R.id.cepo);
+        cepd = getView().findViewById(R.id.cepd);
 
         calcula.setOnClickListener(v -> {
             Float dim1 = Float.valueOf(d1.getText().toString());
