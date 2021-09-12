@@ -105,7 +105,16 @@ public class ManipulaDB extends SQLiteOpenHelper {
             return false;
     }*/
 
-    public Boolean isUser (String usuario, String senha){
+    public Boolean isUser (String usuario){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("Select * from users where usuario = ?", new String[]{usuario});
+        if (cursor.getCount() > 0) {
+            return true;
+        } else
+            return  false;
+    }
+
+    public Boolean isUserPass(String usuario, String senha){
        SQLiteDatabase db = this.getWritableDatabase();
        Cursor cursor = db.rawQuery("Select * from users where usuario = ? and senha = ?", new String []{usuario, senha} );
        if (cursor.getCount()>0){
