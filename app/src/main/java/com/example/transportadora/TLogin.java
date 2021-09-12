@@ -47,7 +47,7 @@ public class TLogin extends AppCompatActivity
                 if(usuario.equals("") || senha.equals("")){
                     Toast.makeText(TLogin.this, "Por favor, digite todos os campos", Toast.LENGTH_SHORT).show();
                 } else{
-                        isRight(usuario, senha);
+                        isUser(usuario, senha);
                 }
             }
         });
@@ -109,20 +109,8 @@ public class TLogin extends AppCompatActivity
         return true;
         }
 
-        public void isUser(String user, String pass) {
-            Boolean checa = BD.isUser(user, pass);
-            if (checa == false) {
-                Boolean inserir = BD.inserirDados(user, pass);
-                if (inserir == true) {
-                    Toast.makeText(TLogin.this, "Cadastro criado com sucesso", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(TLogin.this, "Cadastro já existente !", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
 
-        public void isRight(String user, String pass) {
-            isUser(user, pass);
+        public void isUser(String user, String pass) {
             Boolean checa = BD.isUser(user, pass);
             if (checa == false) {
                 Toast.makeText(TLogin.this, "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
