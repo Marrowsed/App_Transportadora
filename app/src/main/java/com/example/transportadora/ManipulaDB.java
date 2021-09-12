@@ -10,6 +10,9 @@ public class ManipulaDB extends SQLiteOpenHelper {
 
     private static final String NOME_BD = "EMBARCADORES.db"; //Database Name - Nome do Banco de Dados
     private static final int VERSAO_BD = 1;
+    private static String users = "create table users(usuario TEXT primary key, senha TEXT)";
+    private static String pjdata = "create table pjdata(CNPJ TEXT primary key, nome TEXT, sobrenome TEXT, email TEXT, razao TEXT, volume TEXT, regiao TEXT, categoria TEXT)";
+ //   private static String pfdata = "create table pfdata(CPF TEXT primary key, nome TEXT, sobrenome TEXT, email TEXT)";
 
     public ManipulaDB(Context ctx){
 
@@ -18,15 +21,57 @@ public class ManipulaDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase bd) {
-        bd.execSQL("create table users(usuario TEXT primary key, senha TEXT)");
-        //Created a Table named users with usuarios (PK) and senha
-        //Criou uma tabela com usuarios (PK) e senha
+        bd.execSQL(users);
+        bd.execSQL(pjdata);
+    //    bd.execSQL(pfdata);
+    /* Create of 3 tables, Users (User as PK), Data of Enterprises (CNPJ as PK) and Data of People (CPF as PK)
+    Criação de 3 tabelas, Usuários (User como PK), Dados de empresa (CNPJ como PK) e Dados de Pessoa Física (CPF como PK)
+     */
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase bd, int i, int j) {
         bd.execSQL("drop table if exists users");
+        bd.execSQL("drop table if exists pjdata");
+  //      bd.execSQL("drop table if exists pfdata");
     }
+
+    //ENTERPRISES REGISTER - CADASTRO DE EMPRESAS
+    public Boolean inserirPJ(String nome, String sobrenome, String email, String CNPJ, String razao, String volume, String regiao, String categoria) {
+        SQLiteDatabase bd = this.getWritableDatabase();
+        ContentValues content = new ContentValues();
+        content.put("CNPJ", CNPJ);
+        content.put("nome", nome);
+        content.put("sobrenome", sobrenome);
+        content.put("email", email);
+        content.put("razao", razao);
+        content.put("volume", volume);
+        content.put("regiao", regiao);
+        content.put("categoria", categoria);
+
+        long resultado = bd.insert("pjdata", null, content);
+        if (resultado == -1){
+            return false;
+        }else
+            return  true;
+    }
+
+ /* CPF IS A NATIONAL REGISTER FOR PEOPLE - CADASTRO DE PESSOA FÍSICA
+    public Boolean inserirPF(String CPF, String nome, String sobrenome, String email) {
+        SQLiteDatabase bd = this.getWritableDatabase();
+        ContentValues content = new ContentValues();
+        content.put("CPF", CPF);
+        content.put("nome", nome);
+        content.put("sobrenome", sobrenome);
+        content.put("email", email);
+
+        long resultado = bd.insert("pfdata", null, content);
+        if (resultado == -1){
+            return false
+        }else
+            return  true;
+    }
+    */
 
     public Boolean inserirDados (String usuario, String senha)  {
         SQLiteDatabase bd = this.getWritableDatabase();
@@ -39,6 +84,26 @@ public class ManipulaDB extends SQLiteOpenHelper {
         } else
             return true;
     }
+
+    // CHECK IF CNPJ IS ALREADY ON TABLE - CHECA SE CNPJ JÁ EXISTE
+    public Boolean isDataPJ(String CNPJ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("Select * from pjdata where CNPJ = ?", new String [] {CNPJ});
+        if (cursor.getCount()>0){
+            return true;
+        }else
+            return false;
+    }
+
+    /* CHECK IF CPF IS ALREADY ON TABLE - CHECA SE CPF JÁ EXISTE
+    public Boolean isDataPF(String CPF) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("Select * from pfdata where CPF = ?", new String [] {CPF});
+        if (cursor.getCount()>0){
+            return true;
+        }else
+            return false;
+    }*/
 
     public Boolean isUser (String usuario, String senha){
        SQLiteDatabase db = this.getWritableDatabase();
