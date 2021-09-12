@@ -111,7 +111,7 @@ public class TLogin extends AppCompatActivity
 
 
         public void isUser(String user, String pass) {
-            Boolean checa = BD.isUser(user, pass);
+            Boolean checa = BD.isUserPass(user, pass);
             if (checa == false) {
                 Toast.makeText(TLogin.this, "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
             } else {
