@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="50sp">
+
+        <EditText
+            android:id="@+id/cad_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="16dp"
+            android:hint="Digite seu usuário"
+            android:inputType="text"
+            android:textSize="22sp" />
+
+        <EditText
+            android:id="@+id/cad_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="28dp"
+            android:hint="Digite sua senha"
+            android:inputType="textPassword"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/btn_final"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Cadastre o Usuário" />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
