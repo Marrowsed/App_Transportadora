@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
+    android:id="@+id/fragmento_container_user">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edt_nome"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:hint="Nome"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="25dp"
+            android:gravity="center"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/edt_sobrenome"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:hint="Sobrenome"
+            android:layout_marginTop="20dp"
+
+            android:layout_marginLeft="15dp"
+            android:gravity="center_horizontal"
+            android:inputType="textPersonName"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="100dp">
+
+        <EditText
+            android:id="@+id/edt_email"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:inputType="textEmailAddress"/>
+
+        <EditText
+            android:id="@+id/edt_cnpj"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="CNPJ"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/edt_razao"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Razão Social"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/edt_volume"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Volume por mês"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/edt_regiao"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Região de Coleta"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/edt_categoria"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Categoria da empresa"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:inputType="text"/>
+
+        <Button
+            android:id="@+id/btn_continua"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Continue o Cadastro" />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
