@@ -14,27 +14,25 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.transportadora.fragmentos.Fragmento_Cadastra_User;
+import com.example.transportadora.fragmentos.Fragmento_Home;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
-public class TCadastra extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class TCadastra extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
-    EditText user, pass;
-    Button btn_register;
-    ManipulaDB db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tcadastra);
 
-        db = new ManipulaDB(this);
-
         //Barra de cima
         Toolbar toolbar = findViewById(R.id.toolbar_cadastra);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Cadastra"); // Name of your Toolbar - Nome da sua Barra de cima
+        getSupportActionBar().setTitle("Cadastra"); // Name of your Toolbar - Nome da sua Barra de cima
 
         //Menu lateral
         drawer = findViewById(R.id.drawer_layout_tcadastra);
@@ -52,6 +50,11 @@ public class TCadastra extends AppCompatActivity implements NavigationView.OnNav
             Intent it = new Intent (TCadastra.this, TLogin.class);
             startActivity(it);
         });
+
+        if(savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_tcadastra,
+                    new Fragmento_Cadastra_User()).commit();
+        }
 
     }
 
