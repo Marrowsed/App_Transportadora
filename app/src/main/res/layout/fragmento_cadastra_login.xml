@@ -13,22 +13,24 @@
 
         <EditText
             android:id="@+id/cad_user"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:layout_marginBottom="16dp"
             android:hint="Digite seu usuário"
             android:inputType="text"
+            android:gravity="center_horizontal"
             android:textSize="22sp" />
 
         <EditText
             android:id="@+id/cad_pass"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="28dp"
             android:hint="Digite sua senha"
             android:inputType="textPassword"
+            android:gravity="center_horizontal"
             android:textSize="22sp" />
 
         <Button

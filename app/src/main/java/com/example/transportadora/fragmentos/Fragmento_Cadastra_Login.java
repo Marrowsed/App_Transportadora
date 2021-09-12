@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -45,17 +44,30 @@ public class Fragmento_Cadastra_Login extends Fragment {
 
             if (usuario.equals("") || senha.equals("")) {
                 Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
-            } else {
-                cadastraUser(usuario, senha);
-                Intent it = new Intent(getActivity(), TLogin.class);
-                startActivity(it);
-            }
-        });
+            } else
+                if(isUser(usuario) == false) {
+                    cadastraUser(usuario, senha);
+                    Intent it = new Intent(getActivity(), TLogin.class);
+                    startActivity(it);
+                } else
+                    Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
+            });
+        }
 
+
+    public Boolean isUser(String user){
+        Boolean checa = bd.isUser(user);
+        if (checa == false) {
+                Toast.makeText(getActivity(), "Usuário permitido", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getActivity(), "Usuário já existente !", Toast.LENGTH_SHORT).show();
+            }
+        return true;
     }
 
-    public void cadastraUser(String user, String pass) {
-        Boolean checa = bd.isUser(user, pass);
+    public Boolean cadastraUser(String user, String pass) {
+        isUser(user);
+        Boolean checa = bd.isUserPass(user, pass);
         if (checa == false) {
             Boolean inserir = bd.inserirDados(user, pass);
             if (inserir == true) {
@@ -64,6 +76,7 @@ public class Fragmento_Cadastra_Login extends Fragment {
                 Toast.makeText(getActivity(), "Cadastro já existente !", Toast.LENGTH_SHORT).show();
             }
         }
+        return true;
     }
 }
 
