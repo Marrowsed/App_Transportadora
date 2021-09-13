@@ -41,16 +41,17 @@ public class Fragmento_Cadastra_Login extends Fragment {
         finaliza.setOnClickListener(v -> {
            String usuario = user.getText().toString();
            String senha = pass.getText().toString();
+           Boolean checa = bd.isUser(usuario);
 
             if (usuario.equals("") || senha.equals("")) {
                 Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
             } else
-                if(isUser(usuario) == false) {
-                    cadastraUser(usuario, senha);
-                    Intent it = new Intent(getActivity(), TLogin.class);
-                    startActivity(it);
-                } else
-                    Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
+            if(checa == false){
+               cadastraUser(usuario, senha);
+               Intent it = new Intent(getActivity(), TLogin.class);
+               startActivity(it);
+            } else
+               Toast.makeText(getActivity(), "Usuário já existente !", Toast.LENGTH_SHORT).show();
             });
         }
 

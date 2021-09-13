@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.transportadora.fragmentos.Fragmento_Rastreio;
 import com.google.android.material.navigation.NavigationView;
 
 public class TLogin extends AppCompatActivity
@@ -56,6 +57,14 @@ public class TLogin extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent it = new Intent(TLogin.this, TCadastra.class);
+                startActivity(it);
+            }
+        });
+
+        rastrear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(TLogin.this, Fragmento_Rastreio.class);
                 startActivity(it);
             }
         });
