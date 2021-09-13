@@ -65,12 +65,12 @@ public class TAcesso extends AppCompatActivity
 
     //Chamada da função para abertura/fechamento do menu
     public void onBackPressed() {
+        moveTaskToBack(true);
         if (drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
         } else
             super.onBackPressed();
     }
-
 
     //Navigation implements - Implementação da navegação pelo menu
     @Override
