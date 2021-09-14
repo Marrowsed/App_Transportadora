@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.example.transportadora.fragmentos.Fragmento_Rastreio;
 import com.google.android.material.navigation.NavigationView;
 
+import java.net.URI;
+
 public class TLogin extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -41,14 +43,14 @@ public class TLogin extends AppCompatActivity
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View v) {
+            public void onClick(View v) {
                 String usuario = user.getText().toString();
                 String senha = pass.getText().toString();
 
-                if(usuario.equals("") || senha.equals("")){
+                if (usuario.equals("") || senha.equals("")) {
                     Toast.makeText(TLogin.this, "Por favor, digite todos os campos", Toast.LENGTH_SHORT).show();
-                } else{
-                        isUser(usuario, senha);
+                } else {
+                    isUser(usuario, senha);
                 }
             }
         });
@@ -64,7 +66,9 @@ public class TLogin extends AppCompatActivity
         rastrear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent(TLogin.this, Fragmento_Rastreio.class);
+                String uri = "https://www.google.com/search?client=firefox-b-d&q=track+webiste"; //Track Link - Link para rastreio
+                Intent it = new Intent(Intent.ACTION_VIEW);
+                it.setData(Uri.parse(uri));
                 startActivity(it);
             }
         });
