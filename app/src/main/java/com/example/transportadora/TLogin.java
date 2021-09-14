@@ -7,19 +7,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.transportadora.fragmentos.Fragmento_Rastreio;
 import com.google.android.material.navigation.NavigationView;
 
-import java.net.URI;
 
 public class TLogin extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
@@ -41,36 +39,27 @@ public class TLogin extends AppCompatActivity
         rastrear = findViewById(R.id.btn_track);
         BD = new ManipulaDB(this);
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String usuario = user.getText().toString();
-                String senha = pass.getText().toString();
+        login.setOnClickListener(v -> {
+            String usuario = user.getText().toString();
+            String senha = pass.getText().toString();
 
-                if (usuario.equals("") || senha.equals("")) {
-                    Toast.makeText(TLogin.this, "Por favor, digite todos os campos", Toast.LENGTH_SHORT).show();
-                } else {
-                    isUser(usuario, senha);
-                }
+            if (usuario.equals("") || senha.equals("")) {
+                Toast.makeText(TLogin.this, "Por favor, digite todos os campos", Toast.LENGTH_SHORT).show();
+            } else {
+                isUser(usuario, senha);
             }
         });
 
-        cadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it = new Intent(TLogin.this, TCadastra.class);
-                startActivity(it);
-            }
+        cadastrar.setOnClickListener(view -> {
+            Intent it = new Intent(TLogin.this, TCadastra.class);
+            startActivity(it);
         });
 
-        rastrear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String uri = "https://www.google.com/search?client=firefox-b-d&q=track+webiste"; //Track Link - Link para rastreio
-                Intent it = new Intent(Intent.ACTION_VIEW);
-                it.setData(Uri.parse(uri));
-                startActivity(it);
-            }
+        rastrear.setOnClickListener(view -> {
+            String uri = "https://www.google.com/search?client=firefox-b-d&q=track+webiste"; //Track Link - Link para rastreio
+            Intent it = new Intent(Intent.ACTION_VIEW);
+            it.setData(Uri.parse(uri));
+            startActivity(it);
         });
 
         //Barra de cima
@@ -98,6 +87,7 @@ public class TLogin extends AppCompatActivity
             super.onBackPressed();
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -122,10 +112,9 @@ public class TLogin extends AppCompatActivity
         return true;
         }
 
-
         public void isUser(String user, String pass) {
             Boolean checa = BD.isUserPass(user, pass);
-            if (checa == false) {
+            if (!checa) {
                 Toast.makeText(TLogin.this, "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
             } else {
                 Intent it = new Intent(TLogin.this, TAcesso.class);

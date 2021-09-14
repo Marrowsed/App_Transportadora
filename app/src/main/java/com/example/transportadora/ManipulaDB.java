@@ -10,8 +10,8 @@ public class ManipulaDB extends SQLiteOpenHelper {
 
     private static final String NOME_BD = "EMBARCADORES.db"; //Database Name - Nome do Banco de Dados
     private static final int VERSAO_BD = 1;
-    private static String users = "create table users(usuario TEXT primary key, senha TEXT)";
-    private static String pjdata = "create table pjdata(CNPJ TEXT primary key, nome TEXT, sobrenome TEXT, email TEXT, razao TEXT, volume TEXT, regiao TEXT, categoria TEXT)";
+    private static final String users = "create table users(usuario TEXT primary key, senha TEXT)";
+    private static final String pjdata = "create table pjdata(CNPJ TEXT primary key, nome TEXT, sobrenome TEXT, email TEXT, razao TEXT, volume TEXT, regiao TEXT, categoria TEXT)";
  //   private static String pfdata = "create table pfdata(CPF TEXT primary key, nome TEXT, sobrenome TEXT, email TEXT)";
 
     public ManipulaDB(Context ctx){
