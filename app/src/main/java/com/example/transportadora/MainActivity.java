@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Link for your website - Link para o site da empresa
         b2.setOnClickListener(v -> {
-            String url = "https://totalexpress.com.br/";
+            String url = "https://www.google.com/search?client=firefox-b-d&q=seu+site";
             Intent j = new Intent(Intent.ACTION_VIEW);
             j.setData(Uri.parse(url));
             startActivity(j);
