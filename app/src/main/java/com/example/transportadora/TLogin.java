@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -56,7 +57,7 @@ public class TLogin extends AppCompatActivity
         });
 
         rastrear.setOnClickListener(view -> {
-            String uri = "https://www.google.com/search?client=firefox-b-d&q=track+webiste"; //Track Link - Link para rastreio
+            String uri = "https://www.google.com/search?client=firefox-b-d&q=rastreio+"; //Track Link - Link para rastreio
             Intent it = new Intent(Intent.ACTION_VIEW);
             it.setData(Uri.parse(uri));
             startActivity(it);
@@ -92,20 +93,17 @@ public class TLogin extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_mais:
-                String url = "https://www.google.com/search?client=firefox-b-d&q=saiba+mais"; //Link temporário para sua empresa
+                String url = "https://totalexpress.com.br/quem-somos/"; //Link temporário para sua empresa
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);
                 break;
             case R.id.nav_contato:
-                String url2 = "https://www.google.com/search?client=firefox-b-d&q=contato"; //Link temporário de contato
-                Intent j = new Intent(Intent.ACTION_VIEW);
-                j.setData(Uri.parse(url2));
-                startActivity(j);
+                isWhatsApp();
                 break;
             case R.id.nav_forgot:
-                Intent it = new Intent(TLogin.this, TCadastra.class);
-                startActivity(it);
+                Intent cadastra = new Intent(TLogin.this, TCadastra.class);
+                startActivity(cadastra);
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
@@ -122,4 +120,20 @@ public class TLogin extends AppCompatActivity
                 startActivity(it);
             }
         }
+
+    public void isWhatsApp() {
+        PackageManager pm = getPackageManager();
+        String celular = "00000000000"; //Number of your company - Número da empresa
+        try {
+            Intent wpIntent = new Intent (Intent.ACTION_SENDTO, Uri.parse("smsto:" + "" + celular + "?body=" + ""));
+            wpIntent.setPackage("com.whatsapp");
+            startActivity(wpIntent);
+        } catch (Exception e) {
+            Toast.makeText(this, "Redirecionado ao Whatsapp Web !", Toast.LENGTH_SHORT).show();
+            String wp = "https://api.whatsapp.com/send?phone=" + celular;
+            Intent it = new Intent(Intent.ACTION_VIEW);
+            it.setData(Uri.parse(wp));
+            startActivity(it);
+        }
+    }
 }
