@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:hint="CEP ORIGEM"
             android:gravity="center"
-            android:inputType="textPostalAddress"/>
+            android:inputType="number"/>
 
         <EditText
             android:id="@+id/cepd"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:hint="CEP DESTINO"
             android:gravity="center"
-            android:inputType="textPostalAddress"/>
+            android:inputType="number"/>
 
     </LinearLayout>
 

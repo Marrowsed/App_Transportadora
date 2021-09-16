@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.transportadora.R;
+import com.example.transportadora.mascara.CodeMask;
 
 public class Fragmento_Frete extends Fragment {
 
@@ -35,6 +36,8 @@ public class Fragmento_Frete extends Fragment {
         calcula = getView().findViewById(R.id.btn_calc);
         cepo = getView().findViewById(R.id.cepo);
         cepd = getView().findViewById(R.id.cepd);
+        cepo.addTextChangedListener(CodeMask.mask(cepo, CodeMask.FORMAT_CEP));
+        cepd.addTextChangedListener(CodeMask.mask(cepd, CodeMask.FORMAT_CEP));
 
         calcula.setOnClickListener(v -> {
             Float dim1 = Float.valueOf(d1.getText().toString());
