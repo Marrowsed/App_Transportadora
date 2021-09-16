@@ -17,11 +17,12 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.transportadora.ManipulaDB;
 import com.example.transportadora.R;
 import com.example.transportadora.TLogin;
+import com.example.transportadora.mascara.CodeMask;
 
 public class Fragmento_Cadastra_User extends Fragment {
 
-    EditText nome, sobrenome, email, cnpj, razao, volume, regiao, categoria;
-    Button continua;
+    protected EditText nome, sobrenome, email, cnpj, razao, volume, regiao, categoria;
+    protected Button continua;
     ManipulaDB bd;
 
     @Nullable
@@ -36,6 +37,7 @@ public class Fragmento_Cadastra_User extends Fragment {
         sobrenome = getView().findViewById(R.id.edt_sobrenome);
         email = getView().findViewById(R.id.edt_email);
         cnpj = getView().findViewById(R.id.edt_cnpj);
+        cnpj.addTextChangedListener(CodeMask.mask(cnpj, CodeMask.FORMAT_CNPJ));
         razao = getView().findViewById(R.id.edt_razao);
         volume = getView().findViewById(R.id.edt_volume);
         regiao = getView().findViewById(R.id.edt_regiao);

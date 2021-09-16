@@ -50,7 +50,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:gravity="center"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress" />
+
+
 
         <EditText
             android:id="@+id/edt_cnpj"
@@ -60,7 +62,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:gravity="center"
-            android:inputType="number"/>
+            android:inputType="number" />
 
         <EditText
             android:id="@+id/edt_razao"
