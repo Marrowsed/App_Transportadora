@@ -121,6 +121,7 @@ public class TLogin extends AppCompatActivity
             }
         }
 
+        //Function to call Whatsapp - Função para chamar Whatsapp
     public void isWhatsApp() {
         PackageManager pm = getPackageManager();
         String celular = "00000000000"; //Number of your company - Número da empresa
