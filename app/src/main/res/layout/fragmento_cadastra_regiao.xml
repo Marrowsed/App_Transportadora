@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center"
+    android:id="@+id/fragmento_container_regiao">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/edt_empresa"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="CNPJ"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="CNPJ"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/edt_cep"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="CEP de Coleta"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:inputType="number"/>
+
+
+        <EditText
+            android:id="@+id/edt_volume"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Volume por mês"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/edt_categoria"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Categoria da empresa"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:inputType="text"/>
+
+        <Button
+            android:id="@+id/btn_regiao"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Continue o Cadastro" />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
