@@ -30,6 +30,8 @@ public class Fragmento_Cadastra_User extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragmento_cadastra_user, container, false);
         }
+    
+    
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
