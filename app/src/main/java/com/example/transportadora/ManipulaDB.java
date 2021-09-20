@@ -85,6 +85,16 @@ public class ManipulaDB extends SQLiteOpenHelper {
             return true;
     }
 
+    public Boolean atualizaPJ (String CNPJ, String volume, String regiao, String categoria) {
+        SQLiteDatabase bd = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("volume", volume);
+        cv.put("regiao", regiao);
+        cv.put("categoria", categoria);
+        bd.update("pjdata", cv, "CNPJ =?", new String[] {CNPJ});
+        return true;
+    }
+
     // CHECK IF CNPJ IS ALREADY ON TABLE - CHECA SE CNPJ JÁ EXISTE
     public Boolean isDataPJ(String CNPJ) {
         SQLiteDatabase db = this.getWritableDatabase();
