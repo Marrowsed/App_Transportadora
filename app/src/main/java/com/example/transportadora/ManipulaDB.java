@@ -133,4 +133,12 @@ public class ManipulaDB extends SQLiteOpenHelper {
            return false;
     }
 
+    public Boolean updatePass (String usuario, String senha) {
+        SQLiteDatabase bd = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("senha", senha);
+        bd.update("users", cv, "usuario = ?", new String[]{usuario});
+        return true;
+    }
+
 }
