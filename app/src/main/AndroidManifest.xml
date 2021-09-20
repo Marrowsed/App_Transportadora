@@ -17,7 +17,7 @@
         <activity
             android:name=".TLogin"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".Ajuda"
             android:exported="true"
