@@ -130,7 +130,7 @@ public class TLogin extends AppCompatActivity
             wpIntent.setPackage("com.whatsapp");
             startActivity(wpIntent);
         } catch (Exception e) {
-            Toast.makeText(this, "Redirecionado ao Whatsapp Web !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(TLogin.this, "Redirecionado ao Whatsapp Web !", Toast.LENGTH_SHORT).show();
             String wp = "https://api.whatsapp.com/send?phone=" + celular;
             Intent it = new Intent(Intent.ACTION_VIEW);
             it.setData(Uri.parse(wp));
