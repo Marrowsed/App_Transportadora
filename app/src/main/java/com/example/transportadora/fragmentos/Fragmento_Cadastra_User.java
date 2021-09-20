@@ -22,14 +22,15 @@ import com.example.transportadora.mascara.CodeMask;
 public class Fragmento_Cadastra_User extends Fragment {
 
     protected EditText nome, sobrenome, email, cnpj, razao, volume, regiao, categoria;
-    protected Button continua;
+    protected Button continua, continua2;
+    Fragmento_Cadastra_Regiao fr;
     ManipulaDB bd;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragmento_cadastra_user, container, false);
-        }
+    }
     
     
 
@@ -41,9 +42,6 @@ public class Fragmento_Cadastra_User extends Fragment {
         cnpj = getView().findViewById(R.id.edt_cnpj);
         cnpj.addTextChangedListener(CodeMask.mask(cnpj, CodeMask.FORMAT_CNPJ));
         razao = getView().findViewById(R.id.edt_razao);
-        volume = getView().findViewById(R.id.edt_volume);
-        regiao = getView().findViewById(R.id.edt_regiao);
-        categoria = getView().findViewById(R.id.edt_categoria);
         continua = getView().findViewById(R.id.btn_continua);
         bd = new ManipulaDB(getActivity());
 
@@ -53,34 +51,38 @@ public class Fragmento_Cadastra_User extends Fragment {
             String mail = email.getText().toString();
             String CNPJ = cnpj.getText().toString();
             String social = razao.getText().toString();
-            String vol = volume.getText().toString();
-            String reg = regiao.getText().toString();
-            String cat = categoria.getText().toString();
+            Bundle bundle = new Bundle();
+            bundle.putString("CNPJ", CNPJ);
 
-            if(name.equals("") || surname.equals("") || mail.equals("") || CNPJ.equals("") || social.equals("")){
+            if (name.equals("") || surname.equals("") || mail.equals("") || CNPJ.equals("") || social.equals("")) {
                 Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
-            } else {
-                cadastraUser(name, surname, mail, CNPJ, social, vol, reg, cat);
+            } else if (!bd.isDataPJ(CNPJ)) {
+                cadastraUser(name, surname, mail, CNPJ, social, "null", "null", "null");
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = fm.beginTransaction();
-                transaction.replace(R.id.fragmento_container_user, new Fragmento_Cadastra_Login());
+                fr = new Fragmento_Cadastra_Regiao();
+                fr.setArguments(bundle);
+                transaction.replace(R.id.fragmento_container_user, new Fragmento_Cadastra_Regiao());
                 transaction.commit();
+            } else {
+                Toast.makeText(getActivity(), "CNPJ Inválido", Toast.LENGTH_SHORT).show();
             }
+
         });
 
     }
 
-    public void cadastraUser(String nome, String sobrenome, String email, String CNPJ, String razao, String volume, String regiao, String categoria){
+    public void cadastraUser(String nome, String sobrenome, String email, String CNPJ, String razao, String volume, String regiao, String categoria) {
         Boolean checa = bd.isDataPJ(CNPJ);
-        if (checa == false){
+        if (checa == false) {
             Boolean inserir = bd.inserirPJ(nome, sobrenome, email, CNPJ, razao, volume, regiao, categoria);
-            if(inserir == true){
+            if (inserir == true) {
                 Toast.makeText(getActivity(), "CNPJ em Validação", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getActivity(), "CNPJ Inválido", Toast.LENGTH_SHORT).show();
             }
-        } else {
-            Toast.makeText(getActivity(), "CNPJ Inválido", Toast.LENGTH_SHORT).show();
         }
-    }
 
+    }
 }
 
