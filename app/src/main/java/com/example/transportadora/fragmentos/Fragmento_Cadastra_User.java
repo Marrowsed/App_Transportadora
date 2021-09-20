@@ -19,10 +19,13 @@ import com.example.transportadora.R;
 import com.example.transportadora.TLogin;
 import com.example.transportadora.mascara.CodeMask;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Fragmento_Cadastra_User extends Fragment {
 
-    protected EditText nome, sobrenome, email, cnpj, razao, volume, regiao, categoria;
-    protected Button continua, continua2;
+    protected EditText nome, sobrenome, email, cnpj, razao;
+    protected Button continua;
     Fragmento_Cadastra_Regiao fr;
     ManipulaDB bd;
 
@@ -56,13 +59,15 @@ public class Fragmento_Cadastra_User extends Fragment {
 
             if (name.equals("") || surname.equals("") || mail.equals("") || CNPJ.equals("") || social.equals("")) {
                 Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
-            } else if (!bd.isDataPJ(CNPJ)) {
+            } else if(!validateEmail(mail)) {
+                Toast.makeText(getActivity(), "E-mail inválido !", Toast.LENGTH_SHORT).show();
+            }else if (!bd.isDataPJ(CNPJ)) {
                 cadastraUser(name, surname, mail, CNPJ, social, "null", "null", "null");
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = fm.beginTransaction();
                 fr = new Fragmento_Cadastra_Regiao();
                 fr.setArguments(bundle);
-                transaction.replace(R.id.fragmento_container_user, new Fragmento_Cadastra_Regiao());
+                transaction.replace(R.id.fragmento_container_user, fr);
                 transaction.commit();
             } else {
                 Toast.makeText(getActivity(), "CNPJ Inválido", Toast.LENGTH_SHORT).show();
@@ -82,7 +87,22 @@ public class Fragmento_Cadastra_User extends Fragment {
                 Toast.makeText(getActivity(), "CNPJ Inválido", Toast.LENGTH_SHORT).show();
             }
         }
-
     }
+
+    public Boolean validateEmail (String email){
+        String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+        Pattern emailp = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        CharSequence emailc  = email;
+        Matcher emailm = emailp.matcher(emailc);
+        Boolean isEmail = false;
+        if (emailm.matches()){
+            isEmail = true;
+        } else {
+            return false;
+        }
+        return isEmail;
+    }
+
+
 }
 

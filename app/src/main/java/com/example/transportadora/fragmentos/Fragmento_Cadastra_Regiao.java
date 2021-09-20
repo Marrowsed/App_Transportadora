@@ -19,7 +19,7 @@ import com.example.transportadora.mascara.CodeMask;
 
 public class Fragmento_Cadastra_Regiao extends Fragment {
 
-    protected EditText cnpj, razao, volume, regiao, categoria;
+    public EditText cnpj, razao, volume, regiao, categoria;
     protected Button continua2;
     ManipulaDB bd;
     String empresa;
@@ -65,7 +65,7 @@ public class Fragmento_Cadastra_Regiao extends Fragment {
 
             if(vol.equals("") || reg.equals("") || cat.equals("")){
                 Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
-            } else if (!bd.isDataPJ(CNPJ)){
+            } else if (bd.isDataPJ(CNPJ)){
                 atualizaUser(CNPJ, vol, reg, cat);
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = fm.beginTransaction();
@@ -86,11 +86,11 @@ public class Fragmento_Cadastra_Regiao extends Fragment {
             }
     }
 
-    private void setEmpresa(String empresa) {
+    public void setEmpresa(String empresa) {
         this.empresa = empresa;
     }
 
-   public String getEmpresa () {
+    public String getEmpresa () {
             return empresa;
         }
 
