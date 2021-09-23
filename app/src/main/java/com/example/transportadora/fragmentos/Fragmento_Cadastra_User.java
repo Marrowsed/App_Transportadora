@@ -30,7 +30,7 @@ import org.json.JSONObject;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Fragmento_Cadastra_User extends Fragment {
+public class Fragmento_Cadastra_User extends Fragment implements View.OnClickListener {
 
     protected EditText nome, sobrenome, email, cnpj;
     TextView razao;
@@ -48,7 +48,6 @@ public class Fragmento_Cadastra_User extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mQueue = Volley.newRequestQueue(getActivity());
     }
 
@@ -63,38 +62,8 @@ public class Fragmento_Cadastra_User extends Fragment {
         valide = getView().findViewById(R.id.btn_valida);
         bd = new ManipulaDB(getActivity());
 
-        continua.setOnClickListener(v -> {
-            String name = nome.getText().toString();
-            String surname = sobrenome.getText().toString();
-            String mail = email.getText().toString();
-            String CNPJ = cnpj.getText().toString();
-            String social = razao.getText().toString();
-            Bundle bundle = new Bundle();
-            bundle.putString("CNPJ", CNPJ);
-
-            if (name.equals("") || surname.equals("") || mail.equals("") || CNPJ.equals("") || social.equals("")) {
-                Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
-            } else if (!validateEmail(mail)) {
-                Toast.makeText(getActivity(), "E-mail inválido !", Toast.LENGTH_SHORT).show();
-            } else if (!bd.isDataPJ(CNPJ)) {
-                cadastraUser(name, surname, mail, CNPJ, social, "null", "null", "null");
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                FragmentTransaction transaction = fm.beginTransaction();
-                fr = new Fragmento_Cadastra_Regiao();
-                fr.setArguments(bundle);
-                transaction.replace(R.id.fragmento_container_user, fr);
-                transaction.commit();
-            } else {
-                Toast.makeText(getActivity(), "CNPJ Inválido", Toast.LENGTH_SHORT).show();
-            }
-
-        });
-
-        valide.setOnClickListener(view1 -> {
-            String PJ = cnpj.getText().toString();
-            String url = "https://www.receitaws.com.br/v1/cnpj/" + PJ;
-            jsonParse(url);
-        });
+        continua.setOnClickListener(this);
+        valide.setOnClickListener(this);
 
     }
 
@@ -122,6 +91,8 @@ public class Fragmento_Cadastra_User extends Fragment {
             @Override
             public void onErrorResponse(VolleyError erro) {
                 erro.printStackTrace();
+                Toast.makeText(getActivity(), "CNPJ Inválido ! ", Toast.LENGTH_SHORT).show();
+                razao.setText("");
             }
         });
 
@@ -156,6 +127,43 @@ public class Fragmento_Cadastra_User extends Fragment {
             }
             return isEmail;
         }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_continua:
+                String name = nome.getText().toString();
+                String surname = sobrenome.getText().toString();
+                String mail = email.getText().toString();
+                String CNPJ = cnpj.getText().toString();
+                String social = razao.getText().toString();
+                Bundle bundle = new Bundle();
+                bundle.putString("CNPJ", CNPJ);
+
+                if (name.equals("") || surname.equals("") || mail.equals("") || CNPJ.equals("") || social.equals("")) {
+                    Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
+                } else if (!validateEmail(mail)) {
+                    Toast.makeText(getActivity(), "E-mail inválido !", Toast.LENGTH_SHORT).show();
+                } else if (!bd.isDataPJ(CNPJ)) {
+                    cadastraUser(name, surname, mail, CNPJ, social, "null", "null", "null");
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    FragmentTransaction transaction = fm.beginTransaction();
+                    fr = new Fragmento_Cadastra_Regiao();
+                    fr.setArguments(bundle);
+                    transaction.replace(R.id.fragmento_container_user, fr);
+                    transaction.commit();
+                } else {
+                    Toast.makeText(getActivity(), "CNPJ Inválido", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.btn_valida:
+                String PJ = cnpj.getText().toString();
+                String url = "https://www.receitaws.com.br/v1/cnpj/" + PJ;
+                jsonParse(url);
+                break;
+        }
+
     }
+}
 
 
