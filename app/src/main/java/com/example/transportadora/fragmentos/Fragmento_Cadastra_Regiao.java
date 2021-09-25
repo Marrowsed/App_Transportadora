@@ -35,6 +35,7 @@ public class Fragmento_Cadastra_Regiao extends Fragment implements View.OnClickL
     ManipulaDB bd;
     String empresa;
     private RequestQueue mQueue;
+    Fragmento_Cadastra_Login fl;
 
     @Nullable
     @Override
@@ -141,6 +142,7 @@ public class Fragmento_Cadastra_Regiao extends Fragment implements View.OnClickL
             } else {
                 Toast.makeText(getActivity(), "CNPJ Inválido", Toast.LENGTH_SHORT).show();
             }
+            bd.close();
     }
 
     public void setEmpresa(String empresa) {
@@ -163,16 +165,21 @@ public class Fragmento_Cadastra_Regiao extends Fragment implements View.OnClickL
                 String vol = volume.getText().toString();
                 String reg = regiao.getText().toString();
                 String cat = categoria.getText().toString();
+                Bundle bundle = new Bundle();
+                bundle.putString("CNPJ", CNPJ);
 
                 if (vol.equals("") || reg.equals("") || cat.equals("")) {
                     Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
                 } else if (bd.isDataPJ(CNPJ)) {
                     atualizaUser(CNPJ, vol, reg, cat);
                     FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fl = new Fragmento_Cadastra_Login();
+                    fl.setArguments(bundle);
                     FragmentTransaction transaction = fm.beginTransaction();
-                    transaction.replace(R.id.fragmento_container_regiao, new Fragmento_Cadastra_Login());
+                    transaction.replace(R.id.fragmento_container_regiao, fl);
                     transaction.commit();
                 }
+                bd.close();
                 break;
         }
     }
