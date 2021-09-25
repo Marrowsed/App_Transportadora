@@ -1,12 +1,5 @@
 package com.example.transportadora;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,6 +9,13 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -27,6 +27,7 @@ public class TLogin extends AppCompatActivity
     EditText user, pass;
     private DrawerLayout drawer;
     ManipulaDB BD;
+    String usuario;
 
 
     @Override
@@ -43,6 +44,7 @@ public class TLogin extends AppCompatActivity
         login.setOnClickListener(v -> {
             String usuario = user.getText().toString();
             String senha = pass.getText().toString();
+            setUsuario(usuario);
 
             if (usuario.equals("") || senha.equals("")) {
                 Toast.makeText(TLogin.this, "Por favor, digite todos os campos", Toast.LENGTH_SHORT).show();
@@ -115,7 +117,10 @@ public class TLogin extends AppCompatActivity
             if (!checa) {
                 Toast.makeText(TLogin.this, "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
             } else {
+                Bundle bundle = new Bundle();
+                bundle.putString("Login", getUsuario());
                 Intent it = new Intent(TLogin.this, TAcesso.class);
+                it.putExtras(bundle);
                 Toast.makeText(TLogin.this, "Acesso permitido", Toast.LENGTH_SHORT).show();
                 startActivity(it);
             }
@@ -136,5 +141,13 @@ public class TLogin extends AppCompatActivity
             it.setData(Uri.parse(wp));
             startActivity(it);
         }
+    }
+
+    public void setUsuario(String usuario){
+        this.usuario = usuario;
+    }
+
+    public String getUsuario(){
+        return usuario;
     }
 }
