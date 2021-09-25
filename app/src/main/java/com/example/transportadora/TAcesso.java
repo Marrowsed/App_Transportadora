@@ -1,5 +1,13 @@
 package com.example.transportadora;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,16 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
-
 import com.example.transportadora.fragmentos.Fragmento_Frete;
-import com.example.transportadora.fragmentos.Fragmento_Home;
 import com.example.transportadora.fragmentos.Fragmento_Rastreio;
 import com.example.transportadora.fragmentos.Fragmento_Registra;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,7 +27,9 @@ public class TAcesso extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
-
+    TextView home;
+    String Login;
+    ManipulaDB bd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +58,17 @@ public class TAcesso extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        if(savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_tacesso,
-                    new Fragmento_Home()).commit();
+        bd = new ManipulaDB(this);
+
+        Intent bundleit = getIntent();
+        if (bundleit != null) {
+            String Login = bundleit.getStringExtra("Login");
+            setLogin(Login);
         }
+
+        home = findViewById(R.id.txt_home);
+        String usuario = getLogin();
+        home.setText("Olá, " + bd.getNome(bd.getCNPJ(usuario)) + " !");
 
     }
 
@@ -118,5 +126,13 @@ public class TAcesso extends AppCompatActivity
             it.setData(Uri.parse(wp));
             startActivity(it);
         }
+    }
+
+    public void setLogin(String Login){
+        this.Login = Login;
+    }
+
+    public String getLogin(){
+        return Login;
     }
 }
