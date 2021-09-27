@@ -24,11 +24,27 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/Theme.AppCompat.Light" />
 
+
         <FrameLayout
             android:id="@+id/fragment_container_tacesso"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/txt_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TESTE"
+            android:textSize="30sp"
+            android:gravity="center"/>
 
     </LinearLayout>
 
