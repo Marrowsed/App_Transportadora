@@ -18,10 +18,9 @@
             android:layout_marginTop="28dp"
             android:layout_marginBottom="16dp"
             android:gravity="center_horizontal"
-            android:tooltipText="Seu usuário"
+            android:hint="Seu usuário"
             android:textSize="22sp"
-            android:inputType="none"
-            android:focusable="false"/>
+            android:inputType="text"/>
 
         <EditText
             android:id="@+id/cad_pass"
