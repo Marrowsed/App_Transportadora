@@ -21,6 +21,7 @@ public class Fragmento_Cadastra_Login extends Fragment implements View.OnClickLi
     EditText user, pass, confirmpass;
     Button finaliza;
     ManipulaDB bd;
+    String empresa;
 
     @Nullable
     @Override
@@ -29,6 +30,15 @@ public class Fragmento_Cadastra_Login extends Fragment implements View.OnClickLi
             container.removeAllViews();
         }
         return inflater.inflate(R.layout.fragmento_cadastra_login, container, false);
+    }
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            empresa = bundle.getString("CNPJ");
+            setEmpresa(empresa);
+        }
     }
 
     @Override
@@ -62,17 +72,18 @@ public class Fragmento_Cadastra_Login extends Fragment implements View.OnClickLi
         }
     }
 
-    public Boolean cadastraUser(String user, String pass) {
+    public Boolean cadastraUser(String user, String pass, String CNPJ) {
         isUser(user);
         Boolean checa = bd.isUserPass(user, pass);
         if (checa == false) {
-            Boolean inserir = bd.inserirDados(user, pass);
+            Boolean inserir = bd.inserirDados(user, pass, CNPJ);
             if (inserir == true) {
                 Toast.makeText(getActivity(), "Cadastro criado com sucesso", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), "Cadastro já existente !", Toast.LENGTH_SHORT).show();
             }
         }
+        bd.close();
         return true;
     }
 
@@ -84,12 +95,13 @@ public class Fragmento_Cadastra_Login extends Fragment implements View.OnClickLi
                 String senha = pass.getText().toString();
                 String confirma = confirmpass.getText().toString();
                 Boolean checa = bd.isUser(usuario);
+                String CNPJ = getEmpresa();
 
                 if (usuario.equals("") || senha.equals("") || confirma.equals("")) {
                     Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
                 } else if(checa == false) {
                     if (confirmaPass(senha, confirma) == true) {
-                        cadastraUser(usuario, senha);
+                        cadastraUser(usuario, senha, CNPJ);
                         Intent it = new Intent(getActivity(), TLogin.class);
                         startActivity(it);
                     } else
@@ -98,6 +110,14 @@ public class Fragmento_Cadastra_Login extends Fragment implements View.OnClickLi
                     Toast.makeText(getActivity(), "Usuário já existente !", Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    public String getEmpresa (){
+        return empresa;
+    }
+
+    public void setEmpresa(String empresa){
+        this.empresa = empresa;
     }
 }
 
