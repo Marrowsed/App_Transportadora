@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.transportadora.fragmentos.Fragmento_Conta;
 import com.example.transportadora.fragmentos.Fragmento_Frete;
 import com.example.transportadora.fragmentos.Fragmento_Rastreio;
 import com.example.transportadora.fragmentos.Fragmento_Registra;
@@ -30,6 +31,7 @@ public class TAcesso extends AppCompatActivity
     TextView home;
     String Login;
     ManipulaDB bd;
+    Fragmento_Conta fc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,14 +101,22 @@ public class TAcesso extends AppCompatActivity
                         new Fragmento_Frete()).commit();
                 break;
             case R.id.nav_mais:
-                    String url = "https://www.google.com/search?client=firefox-b-d&q=quem+somos"; //Link temporário para sua empresa
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
+                String url = "https://www.google.com/search?client=firefox-b-d&q=quem+somos"; //Link temporário para sua empresa
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
                 break;
             case R.id.nav_contato:
-                    isWhatsApp();
-                    break;
+                isWhatsApp();
+                break;
+            case R.id.nav_conta:
+                Bundle bundle = new Bundle();
+                bundle.putString("Login", getLogin());
+                fc = new Fragmento_Conta();
+                fc.setArguments(bundle);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_tacesso,
+                        fc).commit();
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);
