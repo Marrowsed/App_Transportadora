@@ -218,12 +218,46 @@ public class ManipulaDB extends SQLiteOpenHelper {
             }
         }
         cursor.close();
-        String retorna = getNome(CNPJ);
+        String retorna = getEmail(CNPJ);
         bd.close();
         return retorna;
     }
 
+    public String getRazao (String CNPJ) {
+        SQLiteDatabase bd = this.getWritableDatabase();
+        Cursor cursor = bd.rawQuery("Select razao from pjdata where CNPJ = ?", new String[] {CNPJ});
+        if(cursor!=null && cursor.getCount() > 0) {
+            if (cursor.moveToFirst()) {
+                do {
+                    int id = cursor.getColumnIndex("razao");
+                    String Razao = cursor.getString(id);
+                    return Razao;
+                } while (cursor.moveToNext());
+            }
+        }
+        cursor.close();
+        String retorna = getRazao(CNPJ);
+        bd.close();
+        return retorna;
+    }
 
+    public String getRegiao (String CNPJ){
+        SQLiteDatabase bd = this.getWritableDatabase();
+        Cursor cursor = bd.rawQuery("Select nome from pjdata where CNPJ = ?", new String[] {CNPJ});
+        if(cursor!=null && cursor.getCount() > 0) {
+            if (cursor.moveToFirst()) {
+                do {
+                    int id = cursor.getColumnIndex("regiao");
+                    String Regiao = cursor.getString(id);
+                    return Regiao;
+                } while (cursor.moveToNext());
+            }
+        }
+        cursor.close();
+        String retorna = getRegiao(CNPJ);
+        bd.close();
+        return retorna;
+    }
 
 }
 
