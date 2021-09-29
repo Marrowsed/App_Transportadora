@@ -194,8 +194,8 @@ public class ManipulaDB extends SQLiteOpenHelper {
             if (cursor.moveToFirst()) {
                 do {
                     int id = cursor.getColumnIndex("senha");
-                    String Nome = cursor.getString(id);
-                    return Nome;
+                    String Senha = cursor.getString(id);
+                    return Senha;
                 } while (cursor.moveToNext());
             }
         }
@@ -204,6 +204,27 @@ public class ManipulaDB extends SQLiteOpenHelper {
         bd.close();
         return retorna;
     }
+
+    public String getEmail (String CNPJ){
+        SQLiteDatabase bd = this.getWritableDatabase();
+        Cursor cursor = bd.rawQuery("Select email from pjdata where CNPJ = ?", new String[] {CNPJ});
+        if(cursor!=null && cursor.getCount() > 0) {
+            if (cursor.moveToFirst()) {
+                do {
+                    int id = cursor.getColumnIndex("email");
+                    String Email = cursor.getString(id);
+                    return Email;
+                } while (cursor.moveToNext());
+            }
+        }
+        cursor.close();
+        String retorna = getNome(CNPJ);
+        bd.close();
+        return retorna;
+    }
+
+
+
 }
 
 
