@@ -259,6 +259,14 @@ public class ManipulaDB extends SQLiteOpenHelper {
         return retorna;
     }
 
+    public boolean updateRegiao (String CNPJ, String regiao) {
+        SQLiteDatabase bd = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("regiao", regiao);
+        bd.update("pjdata", cv, "CNPJ = ?", new String[]{CNPJ});
+        return true;
+    }
+
 }
 
 
