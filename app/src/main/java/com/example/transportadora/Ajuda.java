@@ -28,5 +28,7 @@ public class Ajuda extends AppCompatActivity {
         getSupportActionBar().setTitle("Ajuda"); // Name of your Toolbar - Nome da sua Barra de cima
 
 
+
+
     }
 }
