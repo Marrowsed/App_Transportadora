@@ -16,6 +16,10 @@ import com.example.transportadora.ManipulaDB;
 import com.example.transportadora.R;
 import com.example.transportadora.TLogin;
 
+import java.text.Normalizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Fragmento_Cadastra_Login extends Fragment implements View.OnClickListener {
 
     EditText user, pass, confirmpass;
@@ -100,7 +104,8 @@ public class Fragmento_Cadastra_Login extends Fragment implements View.OnClickLi
                 if (usuario.equals("") || senha.equals("") || confirma.equals("")) {
                     Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
                 } else if(checa == false) {
-                    if (confirmaPass(senha, confirma) == true) {
+                    validateUser(usuario);
+                    if (validatePass(senha) && confirmaPass(senha, confirma) == true) {
                         cadastraUser(usuario, senha, CNPJ);
                         Intent it = new Intent(getActivity(), TLogin.class);
                         startActivity(it);
@@ -118,6 +123,28 @@ public class Fragmento_Cadastra_Login extends Fragment implements View.OnClickLi
 
     public void setEmpresa(String empresa){
         this.empresa = empresa;
+    }
+
+    public static String validateUser (String user){
+        String regex = "\\s+";
+        String regexu = user.replaceAll(regex, "");
+        String userf = Normalizer.normalize(regexu, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+        return userf;
+    }
+
+    public static Boolean validatePass (String senha){
+        String regex = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
+        //8 dígitos, sem espaços, Pelo menos: 1 Letra maíuscula, 1 Letra Miníscula,  1 Especial, 1 Número
+        Pattern senhap = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        CharSequence senhac = senha;
+        Matcher senham = senhap.matcher(senhac);
+        Boolean isPass = false;
+        if(senham.matches()){
+            isPass = true;
+        } else {
+            return false;
+        }
+        return isPass;
     }
 }
 
