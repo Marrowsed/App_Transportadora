@@ -67,6 +67,43 @@ public class Fragmento_Cadastra_User extends Fragment implements View.OnClickLis
 
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_continua:
+                String name = nome.getText().toString().toLowerCase();
+                String surname = sobrenome.getText().toString().toLowerCase();
+                String mail = email.getText().toString();
+                String CNPJ = cnpj.getText().toString();
+                String social = razao.getText().toString();
+                Bundle bundle = new Bundle();
+                bundle.putString("CNPJ", CNPJ);
+
+                if (name.equals("") || surname.equals("") || mail.equals("") || CNPJ.equals("") || social.equals("")) {
+                    Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
+                } else if (!validateEmail(mail)) {
+                    Toast.makeText(getActivity(), "E-mail inválido !", Toast.LENGTH_SHORT).show();
+                } else if (!bd.isDataPJ(CNPJ)) {
+                    cadastraUser(name, surname, mail, CNPJ, social, "null", "null", "null");
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    FragmentTransaction transaction = fm.beginTransaction();
+                    fr = new Fragmento_Cadastra_Regiao();
+                    fr.setArguments(bundle);
+                    transaction.replace(R.id.fragmento_container_user, fr);
+                    transaction.commit();
+                } else {
+                    Toast.makeText(getActivity(), "CNPJ Inválido", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.btn_valida:
+                String PJ = cnpj.getText().toString();
+                String url = "https://www.receitaws.com.br/v1/cnpj/" + PJ;
+                jsonParse(url);
+                break;
+        }
+
+    }
+
     private void jsonParse(String url) {
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
@@ -99,70 +136,55 @@ public class Fragmento_Cadastra_User extends Fragment implements View.OnClickLis
         mQueue.add(request);
     }
 
-            public void cadastraUser(String nome, String sobrenome, String email, String CNPJ, String
-                    razao, String volume, String regiao, String categoria) {
-                Boolean checa = bd.isDataPJ(CNPJ);
-                if (checa == false) {
-                    Boolean inserir = bd.inserirPJ(nome, sobrenome, email, CNPJ, razao, volume, regiao, categoria);
-                    if (inserir == true) {
-                        Toast.makeText(getActivity(), "CNPJ em Validação", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getActivity(), "CNPJ Inválido", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-
-
-        public Boolean validateEmail (String email){
-            String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
-            Pattern emailp = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-            CharSequence emailc = email;
-            Matcher emailm = emailp.matcher(emailc);
-            Boolean isEmail = false;
-            if (emailm.matches()) {
-                isEmail = true;
+    public void cadastraUser(String nome, String sobrenome, String email, String CNPJ, String
+            razao, String volume, String regiao, String categoria) {
+        validateNome(nome);
+        validateSobrenome(sobrenome);
+        Boolean checa = bd.isDataPJ(CNPJ);
+        if (checa == false) {
+            Boolean inserir = bd.inserirPJ(nome, sobrenome, email, CNPJ, razao, volume, regiao, categoria);
+            if (inserir == true) {
+                Toast.makeText(getActivity(), "CNPJ em Validação", Toast.LENGTH_SHORT).show();
             } else {
-                return false;
+                Toast.makeText(getActivity(), "CNPJ Inválido", Toast.LENGTH_SHORT).show();
             }
-            return isEmail;
         }
+    }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btn_continua:
-                String name = nome.getText().toString();
-                String surname = sobrenome.getText().toString();
-                String mail = email.getText().toString();
-                String CNPJ = cnpj.getText().toString();
-                String social = razao.getText().toString();
-                Bundle bundle = new Bundle();
-                bundle.putString("CNPJ", CNPJ);
 
-                if (name.equals("") || surname.equals("") || mail.equals("") || CNPJ.equals("") || social.equals("")) {
-                    Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
-                } else if (!validateEmail(mail)) {
-                    Toast.makeText(getActivity(), "E-mail inválido !", Toast.LENGTH_SHORT).show();
-                } else if (!bd.isDataPJ(CNPJ)) {
-                    cadastraUser(name, surname, mail, CNPJ, social, "null", "null", "null");
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    FragmentTransaction transaction = fm.beginTransaction();
-                    fr = new Fragmento_Cadastra_Regiao();
-                    fr.setArguments(bundle);
-                    transaction.replace(R.id.fragmento_container_user, fr);
-                    transaction.commit();
-                } else {
-                    Toast.makeText(getActivity(), "CNPJ Inválido", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            case R.id.btn_valida:
-                String PJ = cnpj.getText().toString();
-                String url = "https://www.receitaws.com.br/v1/cnpj/" + PJ;
-                jsonParse(url);
-                break;
+
+    public Boolean validateEmail (String email){
+        String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+        Pattern emailp = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        CharSequence emailc = email;
+        Matcher emailm = emailp.matcher(emailc);
+        Boolean isEmail = false;
+        if (emailm.matches()) {
+            isEmail = true;
+        } else {
+            return false;
         }
+        return isEmail;
+    }
 
+    public static String validateNome(String nome){
+        String regex = "\\s+";
+        nome.toLowerCase();
+        String nomef = nome.replaceAll(regex, "");
+        String Nome = nomef.substring(0, 1).toUpperCase() + nomef.substring(1);
+        String min = Nome.toLowerCase();
+        String last = min.substring(0, 1).toUpperCase() + min.substring(1);
+        return last;
+    }
+
+    public static String validateSobrenome(String sobrenome){
+        String regex = "\\s+";
+        sobrenome.toLowerCase();
+        String snomef = sobrenome.replaceAll(regex, "");
+        String Snome = snomef.substring(0, 1).toUpperCase() + snomef.substring(1);
+        String min = Snome.toLowerCase();
+        String last = min.substring(0, 1).toUpperCase() + min.substring(1);
+        return last;
     }
 }
 
