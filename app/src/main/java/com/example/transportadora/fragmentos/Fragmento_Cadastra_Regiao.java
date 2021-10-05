@@ -157,7 +157,9 @@ public class Fragmento_Cadastra_Regiao extends Fragment implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_cep:
-                String url = "https://viacep.com.br/ws/" + regiao.getText().toString() + "/json/";
+                String cep = regiao.getText().toString();
+                String regex = cep.replaceAll("[-]","");
+                String url = "https://viacep.com.br/ws/" + regex + "/json/";
                 jsonCEP(url);
                 break;
             case R.id.btn_regiao:
