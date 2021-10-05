@@ -97,7 +97,8 @@ public class Fragmento_Cadastra_User extends Fragment implements View.OnClickLis
                 break;
             case R.id.btn_valida:
                 String PJ = cnpj.getText().toString();
-                String url = "https://www.receitaws.com.br/v1/cnpj/" + PJ;
+                String regex = PJ.replaceAll("[-./]","");
+                String url = "https://www.receitaws.com.br/v1/cnpj/" + regex;
                 jsonParse(url);
                 break;
         }
