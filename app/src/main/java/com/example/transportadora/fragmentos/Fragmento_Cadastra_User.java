@@ -1,6 +1,7 @@
 package com.example.transportadora.fragmentos;
 
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +22,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.transportadora.Dados;
 import com.example.transportadora.ManipulaDB;
 import com.example.transportadora.R;
+import com.example.transportadora.mascara.CodeMask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,6 +41,7 @@ public class Fragmento_Cadastra_User extends Fragment implements View.OnClickLis
     Fragmento_Cadastra_Regiao fr;
     ManipulaDB bd;
     private RequestQueue mQueue;
+    Dados data;
 
     @Nullable
     @Override
@@ -49,17 +53,32 @@ public class Fragmento_Cadastra_User extends Fragment implements View.OnClickLis
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mQueue = Volley.newRequestQueue(getActivity());
+        data = new Dados();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        //Font
+        Typeface fonte = Typeface.createFromAsset(getActivity().getAssets(), "fonts/IBMPlexSans-Bold.ttf");
+
         nome = getView().findViewById(R.id.edt_nome);
+        nome.setTypeface(fonte);
         sobrenome = getView().findViewById(R.id.edt_sobrenome);
+        sobrenome.setTypeface(fonte);
         email = getView().findViewById(R.id.edt_email);
+        email.setTypeface(fonte);
         cnpj = getView().findViewById(R.id.edt_cnpj);
+        cnpj.addTextChangedListener(CodeMask.mask(cnpj, CodeMask.FORMAT_CNPJ));
+        cnpj.setTypeface(fonte);
         razao = getView().findViewById(R.id.edt_razao);
+        razao.setTypeface(fonte);
         continua = getView().findViewById(R.id.btn_continua);
+        continua.setText("CONTINUE O CADASTRO");
+        continua.setTypeface(fonte);
         valide = getView().findViewById(R.id.btn_valida);
+        valide.setText("VALIDE O CNPJ");
+        valide.setTypeface(fonte);
         bd = new ManipulaDB(getActivity());
 
         continua.setOnClickListener(this);
@@ -74,10 +93,8 @@ public class Fragmento_Cadastra_User extends Fragment implements View.OnClickLis
                 String name = nome.getText().toString().toLowerCase();
                 String surname = sobrenome.getText().toString().toLowerCase();
                 String mail = email.getText().toString();
-                String CNPJ = cnpj.getText().toString();
+                String CNPJ = data.getCNPJ();
                 String social = razao.getText().toString();
-                Bundle bundle = new Bundle();
-                bundle.putString("CNPJ", CNPJ);
 
                 if (name.equals("") || surname.equals("") || mail.equals("") || CNPJ.equals("") || social.equals("")) {
                     Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
@@ -88,7 +105,6 @@ public class Fragmento_Cadastra_User extends Fragment implements View.OnClickLis
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     FragmentTransaction transaction = fm.beginTransaction();
                     fr = new Fragmento_Cadastra_Regiao();
-                    fr.setArguments(bundle);
                     transaction.replace(R.id.fragmento_container_user, fr);
                     transaction.commit();
                 } else {
@@ -97,6 +113,7 @@ public class Fragmento_Cadastra_User extends Fragment implements View.OnClickLis
                 break;
             case R.id.btn_valida:
                 String PJ = cnpj.getText().toString();
+                data.setCNPJ(PJ);
                 String regex = PJ.replaceAll("[-./]","");
                 String url = "https://www.receitaws.com.br/v1/cnpj/" + regex;
                 jsonParse(url);
@@ -114,10 +131,8 @@ public class Fragmento_Cadastra_User extends Fragment implements View.OnClickLis
             public void onResponse(JSONObject response) {
                 try {
                     jsonr = response.getString("nome");
-                    jsonc = response.getString("cnpj");
 
                     razao.setText(jsonr);
-                    cnpj.setText(jsonc);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -143,7 +158,7 @@ public class Fragmento_Cadastra_User extends Fragment implements View.OnClickLis
         validateSobrenome(sobrenome);
         Boolean checa = bd.isDataPJ(CNPJ);
         if (checa == false) {
-            Boolean inserir = bd.inserirPJ(nome, sobrenome, email, CNPJ, razao, volume, regiao, categoria);
+            Boolean inserir = bd.inserirPJ(validateNome(nome), validateSobrenome(sobrenome), email, CNPJ, razao, volume, regiao, categoria);
             if (inserir == true) {
                 Toast.makeText(getActivity(), "CNPJ em Validação", Toast.LENGTH_SHORT).show();
             } else {

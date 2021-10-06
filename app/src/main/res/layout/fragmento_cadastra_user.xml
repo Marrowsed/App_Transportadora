@@ -1,103 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center"
     android:id="@+id/fragmento_container_user">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:gravity="center">
 
-        <EditText
-            android:id="@+id/edt_nome"
-            android:layout_width="180dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nome"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="25dp"
-            android:gravity="center"
-            android:inputType="textPersonName"/>
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edt_sobrenome"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:hint="Sobrenome"
-            android:layout_marginTop="20dp"
+            <ProgressBar
+                android:id="@+id/barra_progresso"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progress="25" />
 
-            android:layout_marginLeft="15dp"
-            android:gravity="center_horizontal"
-            android:inputType="textPersonName"/>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/txt_etapa1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="ETAPA 1/4"/>
+
+
+        </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="100dp">
-
-        <EditText
-            android:id="@+id/edt_email"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:hint="Email"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:inputType="textEmailAddress" />
-
-
+        android:gravity="center">
 
         <EditText
             android:id="@+id/edt_cnpj"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:hint="CNPJ"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:inputType="number" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
-
-            <Button
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn_valida"
-                android:text="Valide o CNPJ"/>
-
-        </LinearLayout>
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:id="@+id/btn_valida"
+            android:text="Valide o CNPJ"/>
 
         <TextView
             android:id="@+id/edt_razao"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:hint="Razão Social"
             android:text="Razão Social"/>
 
+            <EditText
+                android:id="@+id/edt_nome"
+                android:layout_width="300dp"
+                android:layout_height="48dp"
+                android:hint="Nome"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:inputType="textPersonName"/>
+
+            <EditText
+                android:id="@+id/edt_sobrenome"
+                android:layout_width="300dp"
+                android:layout_height="48dp"
+                android:hint="Sobrenome"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/edt_email"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:hint="Email"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:inputType="textEmailAddress" />
 
         <Button
             android:id="@+id/btn_continua"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_height="48dp"
             android:gravity="center_horizontal"
             android:text="Continue o Cadastro" />
 
-    </LinearLayout>
+        </LinearLayout>
 
+        </LinearLayout>
 
-
-</RelativeLayout>
+</ScrollView>
