@@ -1,13 +1,12 @@
 package com.example.transportadora.fragmentos;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -21,18 +20,19 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.transportadora.Dados;
 import com.example.transportadora.ManipulaDB;
 import com.example.transportadora.R;
-import com.example.transportadora.mascara.CodeMask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Fragmento_Cadastra_Regiao extends Fragment implements View.OnClickListener {
 
-    public EditText cnpj, razao, volume, regiao, categoria, rua, compl, neigh, city;
-    protected Button continua2, valida;
+    public EditText volume, regiao, categoria, rua, compl, neigh, city, uf;
+    protected Button continua2, valida, finalize;
     ManipulaDB bd;
+    Dados data;
     String empresa;
     private RequestQueue mQueue;
     Fragmento_Cadastra_Login fl;
@@ -50,42 +50,44 @@ public class Fragmento_Cadastra_Regiao extends Fragment implements View.OnClickL
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mQueue = Volley.newRequestQueue(getActivity());
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            String empresa = bundle.getString("CNPJ");
-            setEmpresa(empresa);
-        }
+        data = new Dados();
+        bd = new ManipulaDB(getActivity());
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        cnpj = getView().findViewById(R.id.edt_empresa);
-        cnpj.addTextChangedListener(CodeMask.mask(cnpj, CodeMask.FORMAT_CNPJ));
-        cnpj.setText(getEmpresa());
-        razao = getView().findViewById(R.id.edt_razao);
-        volume = getView().findViewById(R.id.edt_volume);
+        //Font
+        Typeface fonte = Typeface.createFromAsset(getActivity().getAssets(), "fonts/IBMPlexSans-Bold.ttf");
+
+        //View
         regiao = getView().findViewById(R.id.edt_cep);
+        regiao.setTypeface(fonte);
      /*   regiao.addTextChangedListener(CodeMask.mask(regiao
                 , CodeMask.FORMAT_CEP));*/
         rua = getView().findViewById(R.id.etd_logradouro);
+        rua.setTypeface(fonte);
         compl = getView().findViewById(R.id.edt_complemento);
+        compl.setTypeface(fonte);
         neigh = getView().findViewById(R.id.etd_bairro);
+        neigh.setTypeface(fonte);
         city = getView().findViewById(R.id.edt_cidade);
+        city.setTypeface(fonte);
+        uf = getView().findViewById(R.id.edt_uf);
+        uf.setTypeface(fonte);
         categoria = getView().findViewById(R.id.edt_categoria);
+        categoria.setTypeface(fonte);
+        volume = getView().findViewById(R.id.edt_volume);
+        volume.setTypeface(fonte);
+
+        //Buttons - Botões
         continua2 = getView().findViewById(R.id.btn_regiao);
         valida = getView().findViewById(R.id.btn_cep);
-        bd = new ManipulaDB(getActivity());
+        finalize = getView().findViewById(R.id.btn_finalize);
 
-        Spinner estados = getView().findViewById(R.id.sp_state);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter
-                .createFromResource(getActivity(),
-                        R.array.states,
-                        android.R.layout.simple_spinner_item);
-        estados.setAdapter(adapter);
 
         valida.setOnClickListener(this);
-
         continua2.setOnClickListener(this);
+        finalize.setOnClickListener(this);
 
     }
 
@@ -96,6 +98,7 @@ public class Fragmento_Cadastra_Regiao extends Fragment implements View.OnClickL
             String jsonrua; // json logradouro
             String jsonbairro; // json bairro
             String jsoncidade; // json cidade
+            String jsonuf; // json uf;
 
 
             @Override
@@ -105,30 +108,34 @@ public class Fragmento_Cadastra_Regiao extends Fragment implements View.OnClickL
                     jsonrua = response.getString("logradouro");
                     jsonbairro = response.getString("bairro");
                     jsoncidade = response.getString("localidade");
+                    jsonuf = response.getString("uf");
 
                     regiao.setText(jsoncep);
                     rua.setText(jsonrua);
                     neigh.setText(jsonbairro);
                     city.setText(jsoncidade);
+                    uf.setText(jsonuf);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(getActivity(), "CEP Inválido ! ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "CEP Inválido", Toast.LENGTH_SHORT).show();
                     regiao.setText("");
                     rua.setText("");
                     neigh.setText("");
                     city.setText("");
+                    uf.setText("");
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError erro) {
                 erro.printStackTrace();
-                Toast.makeText(getActivity(), "CEP Inválido ! ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "CEP Inválido", Toast.LENGTH_SHORT).show();
                 regiao.setText("");
                 rua.setText("");
                 neigh.setText("");
                 city.setText("");
+                uf.setText("");
             }
         });
         mQueue.add(request);
@@ -163,7 +170,7 @@ public class Fragmento_Cadastra_Regiao extends Fragment implements View.OnClickL
                 jsonCEP(url);
                 break;
             case R.id.btn_regiao:
-                String CNPJ = cnpj.getText().toString();
+                String CNPJ = data.getCNPJ();
                 String vol = volume.getText().toString();
                 String reg = regiao.getText().toString();
                 String cat = categoria.getText().toString();
@@ -182,6 +189,9 @@ public class Fragmento_Cadastra_Regiao extends Fragment implements View.OnClickL
                     transaction.commit();
                 }
                 bd.close();
+                break;
+            case R.id.btn_finalize:
+
                 break;
         }
     }

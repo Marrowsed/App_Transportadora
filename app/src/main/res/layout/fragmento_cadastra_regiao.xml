@@ -1,50 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center"
     android:id="@+id/fragmento_container_regiao">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/edt_cep"
-                android:layout_width="200dp"
+            <ProgressBar
+                android:id="@+id/barra_progresso"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:max="100"
+                android:progress="50" />
+
+
+            <TextView
+                android:id="@+id/txt_etapa1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:gravity="center"
-                android:hint="CEP de Coleta"
-                android:inputType="number" />
+                android:text="ETAPA 2/4"/>
+
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edt_cep"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:hint="CEP de Coleta"
+                android:inputType="number" />
 
             <Button
                 android:id="@+id/btn_cep"
-                android:layout_width="200dp"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
                 android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
                 android:text="Valida cep"/>
 
         </LinearLayout>
@@ -52,65 +65,59 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/etd_logradouro"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:ems="10"
+                android:layout_width="300dp"
+                android:layout_height="48dp"
                 android:gravity="center"
                 android:hint="Rua"
                 android:inputType="text" />
-
-            <EditText
-                android:id="@+id/edt_number"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="25dp"
-                android:ems="10"
-                android:gravity="center"
-                android:hint="Númeroº"
-                android:inputType="number" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/edt_number"
+                android:layout_width="130dp"
+                android:layout_height="48dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:hint="Número"
+                android:inputType="number" />
 
             <EditText
                 android:id="@+id/edt_complemento"
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:ems="10"
+                android:layout_height="48dp"
                 android:gravity="center"
                 android:hint="Complemento"
                 android:inputType="text" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:gravity="center">
+
             <EditText
                 android:id="@+id/etd_bairro"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="25dp"
-                android:ems="10"
+                android:layout_width="300dp"
+                android:layout_height="48dp"
                 android:gravity="center"
                 android:hint="Bairro"
                 android:inputType="text" />
@@ -121,69 +128,70 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="horizontal">
+
 
             <EditText
                 android:id="@+id/edt_cidade"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
+                android:layout_width="170dp"
+                android:layout_height="48dp"
                 android:gravity="center"
                 android:hint="Cidade"
+                android:layout_marginRight="20dp"
                 android:inputType="text" />
 
-            <Spinner
-                android:id="@+id/sp_state"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+            <EditText
+                android:id="@+id/edt_uf"
+                android:layout_width="110dp"
+                android:hint="UF"
+                android:gravity="center"
+                android:layout_height="match_parent"/>
         </LinearLayout>
-
-        <EditText
-            android:id="@+id/edt_empresa"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="CNPJ"
-            android:inputType="number"
-            android:text="CNPJ"
-            android:visibility="invisible" />
-
 
         <EditText
             android:id="@+id/edt_volume"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
+            android:layout_gravity="center"
             android:hint="Volume por mês"
-            android:inputType="number" />
+            android:inputType="number"
+            android:visibility="gone"/>
 
         <EditText
             android:id="@+id/edt_categoria"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
+            android:layout_gravity="center"
             android:hint="Categoria da empresa"
-            android:inputType="text" />
+            android:inputType="text"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/btn_regiao"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:text="Continue o Cadastro" />
 
+        <Button
+            android:id="@+id/btn_finalize"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="Finalize o Cadastro"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
-
-
-</RelativeLayout>
+</ScrollView>
