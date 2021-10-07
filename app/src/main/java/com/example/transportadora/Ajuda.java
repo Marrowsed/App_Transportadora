@@ -8,6 +8,8 @@ import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+// Unused class - Classe não usável
+
 public class Ajuda extends AppCompatActivity {
 
     @Override
