@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ManipulaDB extends SQLiteOpenHelper {
 
-    private static final String NOME_BD = "EMBARCADORES.db"; //Database Name - Nome do Banco de Dados
+    private static final String NOME_BD = "LOJISTAS.db"; //Database Name - Nome do Banco de Dados
     private static final int VERSAO_BD = 1;
     private static final String users = "create table users(usuario TEXT primary key, senha TEXT, cnpj TEXT)";
     private static final String pjdata = "create table pjdata(CNPJ TEXT primary key, nome TEXT, sobrenome TEXT, email TEXT, razao TEXT, volume TEXT, regiao TEXT, categoria TEXT)";
@@ -27,7 +27,6 @@ public class ManipulaDB extends SQLiteOpenHelper {
     /* Create of 3 tables, Users (User as PK), Data of Enterprises (CNPJ as PK) and Data of People (CPF as PK)
     Criação de 3 tabelas, Usuários (User como PK), Dados de empresa (CNPJ como PK) e Dados de Pessoa Física (CPF como PK)
      */
-        bd.close();
     }
 
     @Override
@@ -35,7 +34,6 @@ public class ManipulaDB extends SQLiteOpenHelper {
         bd.execSQL("drop table if exists users");
         bd.execSQL("drop table if exists pjdata");
   //      bd.execSQL("drop table if exists pfdata");
-        bd.close();
     }
 
     //ENTERPRISES REGISTER - CADASTRO DE EMPRESAS
@@ -55,7 +53,6 @@ public class ManipulaDB extends SQLiteOpenHelper {
         if (resultado == -1){
             return false;
         }else
-            bd.close();
             return  true;
     }
 
@@ -86,7 +83,6 @@ public class ManipulaDB extends SQLiteOpenHelper {
         if (resultado == -1) {
             return false;
         } else
-            bd.close();
             return true;
     }
 
@@ -97,7 +93,6 @@ public class ManipulaDB extends SQLiteOpenHelper {
         cv.put("regiao", regiao);
         cv.put("categoria", categoria);
         bd.update("pjdata", cv, "CNPJ =?", new String[] {CNPJ});
-        bd.close();
         return true;
     }
 
@@ -108,7 +103,6 @@ public class ManipulaDB extends SQLiteOpenHelper {
         if (cursor.getCount()>0){
             return true;
         }else
-            db.close();
             return false;
     }
 
@@ -128,7 +122,6 @@ public class ManipulaDB extends SQLiteOpenHelper {
         if (cursor.getCount() > 0) {
             return true;
         } else
-            db.close();
             return  false;
     }
 
@@ -138,7 +131,6 @@ public class ManipulaDB extends SQLiteOpenHelper {
        if (cursor.getCount()>0){
            return true;
        } else
-           db.close();
            return false;
     }
 
@@ -147,7 +139,6 @@ public class ManipulaDB extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put("senha", senha);
         bd.update("users", cv, "usuario = ?", new String[]{usuario});
-        bd.close();
         return true;
     }
 
@@ -165,7 +156,6 @@ public class ManipulaDB extends SQLiteOpenHelper {
         }
         cursor.close();
         String retorna = getCNPJ(usuario);
-        bd.close();
         return retorna;
     }
 
@@ -183,7 +173,6 @@ public class ManipulaDB extends SQLiteOpenHelper {
         }
         cursor.close();
         String retorna = getNome(CNPJ);
-        bd.close();
         return retorna;
     }
 
@@ -201,7 +190,6 @@ public class ManipulaDB extends SQLiteOpenHelper {
         }
         cursor.close();
         String retorna = getPass(usuario);
-        bd.close();
         return retorna;
     }
 
@@ -219,7 +207,6 @@ public class ManipulaDB extends SQLiteOpenHelper {
         }
         cursor.close();
         String retorna = getEmail(CNPJ);
-        bd.close();
         return retorna;
     }
 
@@ -237,7 +224,6 @@ public class ManipulaDB extends SQLiteOpenHelper {
         }
         cursor.close();
         String retorna = getRazao(CNPJ);
-        bd.close();
         return retorna;
     }
 
@@ -255,7 +241,6 @@ public class ManipulaDB extends SQLiteOpenHelper {
         }
         cursor.close();
         String retorna = getRegiao(CNPJ);
-        bd.close();
         return retorna;
     }
 
