@@ -7,9 +7,9 @@
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
-        android:icon="@drawable/ic_baseline_local_shipping_24"
+        android:icon="@drawable/ic_your_logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_baseline_local_shipping_24"
+        android:roundIcon="@drawable/ic_your_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.Transportadora">
         <activity
