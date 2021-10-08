@@ -27,6 +27,7 @@ public class TLogin extends AppCompatActivity
     EditText user, pass;
     private DrawerLayout drawer;
     ManipulaDB BD;
+    Dados data;
     String usuario;
 
 
@@ -34,17 +35,19 @@ public class TLogin extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tlogin);
+
         login = findViewById(R.id.btn_login);
         user = findViewById(R.id.edt_user);
         pass = findViewById(R.id.edt_pass);
         cadastrar = findViewById(R.id.btn_forgot);
         rastrear = findViewById(R.id.btn_track);
         BD = new ManipulaDB(this);
+        data = new Dados();
 
         login.setOnClickListener(v -> {
             String usuario = user.getText().toString();
             String senha = pass.getText().toString();
-            setUsuario(usuario);
+            data.setLogin(usuario);
 
             if (usuario.equals("") || senha.equals("")) {
                 Toast.makeText(TLogin.this, "Por favor, digite todos os campos", Toast.LENGTH_SHORT).show();
@@ -117,10 +120,7 @@ public class TLogin extends AppCompatActivity
             if (!checa) {
                 Toast.makeText(TLogin.this, "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
             } else {
-                Bundle bundle = new Bundle();
-                bundle.putString("Login", getUsuario());
                 Intent it = new Intent(TLogin.this, TAcesso.class);
-                it.putExtras(bundle);
                 Toast.makeText(TLogin.this, "Acesso permitido", Toast.LENGTH_SHORT).show();
                 startActivity(it);
             }
@@ -143,11 +143,4 @@ public class TLogin extends AppCompatActivity
         }
     }
 
-    public void setUsuario(String usuario){
-        this.usuario = usuario;
-    }
-
-    public String getUsuario(){
-        return usuario;
-    }
 }
