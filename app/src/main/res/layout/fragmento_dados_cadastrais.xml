@@ -14,7 +14,7 @@
             android:id="@+id/btn_edt_user"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="Login ICS"
+            android:text="Login"
             android:textSize="20dp"
             android:visibility="visible"
             android:layout_marginTop="20dp"

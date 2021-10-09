@@ -1,6 +1,5 @@
 package com.example.transportadora.fragmentos;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,19 +20,20 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.transportadora.Dados;
 import com.example.transportadora.ManipulaDB;
 import com.example.transportadora.R;
-import com.example.transportadora.TAcesso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Fragmento_Conta extends Fragment implements View.OnClickListener {
+public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClickListener {
 
     EditText user, pass, confirmaPass, cep, rua, numero, complemento, bairro, cidade;
     Button editaUser, confirmaEdita, editaFatura, confirmaFatura, validaCEP, zerar;
     LinearLayout linha1, linha2, linha3;
     ManipulaDB bd;
+    Dados data;
     String login;
     private RequestQueue mQueue;
 
@@ -44,17 +44,14 @@ public class Fragmento_Conta extends Fragment implements View.OnClickListener {
         if (container != null) {
             container.removeAllViews();
         }
-        return inflater.inflate(R.layout.fragmento_conta, container, false);
+        return inflater.inflate(R.layout.fragmento_dados_cadastrais, container, false);
     }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mQueue = Volley.newRequestQueue(getActivity());
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            login = bundle.getString("Login");
-            setLogin(login);
-        }
+        data = new Dados();
+        bd = new ManipulaDB(getActivity());
     }
 
     @Override
@@ -93,7 +90,7 @@ public class Fragmento_Conta extends Fragment implements View.OnClickListener {
         //Botões voltar
         zerar = getView().findViewById(R.id.btn_zerar);
 
-        bd = new ManipulaDB(getActivity());
+
 
         editaUser.setOnClickListener(this);
         confirmaEdita.setOnClickListener(this);
