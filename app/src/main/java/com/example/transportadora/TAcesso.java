@@ -15,7 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.transportadora.fragmentos.Fragmento_Conta;
+import com.example.transportadora.fragmentos.Fragmento_Dados_Cadastrais;
 import com.example.transportadora.fragmentos.Fragmento_Frete;
 import com.example.transportadora.fragmentos.Fragmento_Rastreio;
 import com.example.transportadora.fragmentos.Fragmento_Registra;
@@ -31,12 +31,15 @@ public class TAcesso extends AppCompatActivity
     TextView home;
     String Login;
     ManipulaDB bd;
-    Fragmento_Conta fc;
+    Fragmento_Dados_Cadastrais fc;
+    Dados data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tacesso);
+        data = new Dados();
+        bd = new ManipulaDB(this);
 
         //Barra de cima
         Toolbar toolbar = findViewById(R.id.toolbar_tacesso);
@@ -45,7 +48,7 @@ public class TAcesso extends AppCompatActivity
         //Help button - Botão de Ajuda
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
-            Intent it = new Intent(TAcesso.this, Ajuda.class);
+            Intent it = new Intent(TAcesso.this, TLogin.class);
             startActivity(it);
         });
 
@@ -60,16 +63,8 @@ public class TAcesso extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        bd = new ManipulaDB(this);
-
-        Intent bundleit = getIntent();
-        if (bundleit != null) {
-            String Login = bundleit.getStringExtra("Login");
-            setLogin(Login);
-        }
-
         home = findViewById(R.id.txt_home);
-        String usuario = getLogin();
+        String usuario = data.getLogin();
         home.setText("Olá, " + bd.getNome(bd.getCNPJ(usuario)) + " !");
 
     }
@@ -110,12 +105,8 @@ public class TAcesso extends AppCompatActivity
                 isWhatsApp();
                 break;
             case R.id.nav_conta:
-                Bundle bundle = new Bundle();
-                bundle.putString("Login", getLogin());
-                fc = new Fragmento_Conta();
-                fc.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_tacesso,
-                        fc).commit();
+                        new Fragmento_Dados_Cadastrais()).commit();
                 break;
         }
 
