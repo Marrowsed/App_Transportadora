@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -31,11 +34,13 @@ public class Fragmento_Cadastra_Regiao extends Fragment implements View.OnClickL
 
     public EditText volume, regiao, categoria, rua, compl, neigh, city, uf;
     protected Button continua2, valida, finalize;
+    TextView etapa1, etapa2;
+    ProgressBar barra1, barra2;
+    LinearLayout linha1, linha2;
     ManipulaDB bd;
     Dados data;
-    String empresa;
+    String CNPJ;
     private RequestQueue mQueue;
-    Fragmento_Cadastra_Login fl;
 
     @Nullable
     @Override
@@ -52,6 +57,7 @@ public class Fragmento_Cadastra_Regiao extends Fragment implements View.OnClickL
         mQueue = Volley.newRequestQueue(getActivity());
         data = new Dados();
         bd = new ManipulaDB(getActivity());
+        CNPJ = data.getCNPJ();
     }
 
     @Override
@@ -60,6 +66,12 @@ public class Fragmento_Cadastra_Regiao extends Fragment implements View.OnClickL
         Typeface fonte = Typeface.createFromAsset(getActivity().getAssets(), "fonts/IBMPlexSans-Bold.ttf");
 
         //View
+        linha1 = getView().findViewById(R.id.linha1_r);
+        linha2 = getView().findViewById(R.id.linha2_r);
+        barra1 = getView().findViewById(R.id.barra_progresso);
+        barra2 = getView().findViewById(R.id.barra_progresso_1);
+        etapa1 = getView().findViewById(R.id.txt_etapa1);
+        etapa2 = getView().findViewById(R.id.txt_etapa1_1);
         regiao = getView().findViewById(R.id.edt_cep);
         regiao.setTypeface(fonte);
      /*   regiao.addTextChangedListener(CodeMask.mask(regiao
@@ -149,16 +161,8 @@ public class Fragmento_Cadastra_Regiao extends Fragment implements View.OnClickL
             } else {
                 Toast.makeText(getActivity(), "CNPJ Inválido", Toast.LENGTH_SHORT).show();
             }
-            bd.close();
     }
 
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
-    }
-
-    public String getEmpresa () {
-            return empresa;
-        }
 
     @Override
     public void onClick(View view) {
@@ -170,28 +174,36 @@ public class Fragmento_Cadastra_Regiao extends Fragment implements View.OnClickL
                 jsonCEP(url);
                 break;
             case R.id.btn_regiao:
-                String CNPJ = data.getCNPJ();
-                String vol = volume.getText().toString();
                 String reg = regiao.getText().toString();
-                String cat = categoria.getText().toString();
-                Bundle bundle = new Bundle();
-                bundle.putString("CNPJ", CNPJ);
 
-                if (vol.equals("") || reg.equals("") || cat.equals("")) {
-                    Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
+                if (reg.equals("")) {
+                    Toast.makeText(getActivity(), "CEP Inváliddo", Toast.LENGTH_SHORT).show();
                 } else if (bd.isDataPJ(CNPJ)) {
-                    atualizaUser(CNPJ, vol, reg, cat);
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
-                    fl = new Fragmento_Cadastra_Login();
-                    fl.setArguments(bundle);
-                    FragmentTransaction transaction = fm.beginTransaction();
-                    transaction.replace(R.id.fragmento_container_regiao, fl);
-                    transaction.commit();
+                    etapa1.setVisibility(View.GONE);
+                    barra1.setVisibility(View.GONE);
+                    etapa2.setVisibility(View.VISIBLE);
+                    barra2.setVisibility(View.VISIBLE);
+                    continua2.setVisibility(View.GONE);
+                    finalize.setVisibility(View.VISIBLE);
+                    linha1.setVisibility(View.GONE);
+                    linha2.setVisibility(View.GONE);
+                    categoria.setVisibility(View.VISIBLE);
+                    volume.setVisibility(View.VISIBLE);
                 }
-                bd.close();
                 break;
             case R.id.btn_finalize:
-
+                String vol = volume.getText().toString();
+                String reg2 = regiao.getText().toString();
+                String cat = categoria.getText().toString();
+                if (vol.equals("") || cat.equals("")) {
+                    Toast.makeText(getActivity(), "Dados inválidos", Toast.LENGTH_SHORT).show();
+                } else {
+                    atualizaUser(CNPJ, vol, reg2, cat);
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    FragmentTransaction transaction = fm.beginTransaction();
+                    transaction.replace(R.id.fragmento_container_regiao, new Fragmento_Cadastra_Login());
+                    transaction.commit();
+                }
                 break;
         }
     }

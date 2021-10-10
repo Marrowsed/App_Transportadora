@@ -14,22 +14,30 @@
         <EditText
             android:id="@+id/cad_user"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="16dp"
-            android:gravity="center_horizontal"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:drawableRight="@drawable/ic_baseline_person_24"
+            android:gravity="center"
             android:hint="Seu usuário"
             android:textSize="22sp"
             android:inputType="text"/>
 
+        <TextView
+            android:id="@+id/txt_pass"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:text="DICA SENHA"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
         <EditText
             android:id="@+id/cad_pass"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="28dp"
-            android:gravity="center_horizontal"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
             android:hint="Digite sua senha"
+            android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
             android:tooltipText="Sua Senha"
             android:inputType="textPassword"
             android:textSize="22sp" />
@@ -37,10 +45,10 @@
         <EditText
             android:id="@+id/cad_confirma"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="28dp"
-            android:gravity="center_horizontal"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:drawableRight="@drawable/ic_baseline_remove_red_eye_24"
             android:hint="Confirme sua senha"
             android:inputType="textPassword"
             android:textSize="22sp" />
@@ -48,8 +56,9 @@
         <Button
             android:id="@+id/btn_final"
             android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
             android:text="Cadastre o Usuário" />
 
     </LinearLayout>
