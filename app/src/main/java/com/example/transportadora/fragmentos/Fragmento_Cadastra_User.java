@@ -53,6 +53,7 @@ public class Fragmento_Cadastra_User extends Fragment implements View.OnClickLis
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mQueue = Volley.newRequestQueue(getActivity());
+        bd = new ManipulaDB(getActivity());
         data = new Dados();
     }
 
@@ -79,7 +80,6 @@ public class Fragmento_Cadastra_User extends Fragment implements View.OnClickLis
         valide = getView().findViewById(R.id.btn_valida);
         valide.setText("VALIDE O CNPJ");
         valide.setTypeface(fonte);
-        bd = new ManipulaDB(getActivity());
 
         continua.setOnClickListener(this);
         valide.setOnClickListener(this);
@@ -131,7 +131,6 @@ public class Fragmento_Cadastra_User extends Fragment implements View.OnClickLis
             public void onResponse(JSONObject response) {
                 try {
                     jsonr = response.getString("nome");
-
                     razao.setText(jsonr);
 
                 } catch (JSONException e) {

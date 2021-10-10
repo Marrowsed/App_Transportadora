@@ -33,10 +33,30 @@
                 android:gravity="center"
                 android:text="ETAPA 2/4"/>
 
+            <ProgressBar
+                android:id="@+id/barra_progresso_1"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progress="75"
+                android:visibility="gone"/>
+
+
+            <TextView
+                android:id="@+id/txt_etapa1_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="ETAPA 3/4"
+                android:visibility="gone"/>
+
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linha1_r"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -63,93 +83,103 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linha2_r"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/etd_logradouro"
-                android:layout_width="300dp"
-                android:layout_height="48dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:hint="Rua"
-                android:inputType="text" />
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etd_logradouro"
+                    android:layout_width="300dp"
+                    android:layout_height="48dp"
+                    android:gravity="center"
+                    android:hint="Rua"
+                    android:inputType="text" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edt_number"
+                    android:layout_width="130dp"
+                    android:layout_height="48dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:hint="Número"
+                    android:inputType="number" />
+
+                <EditText
+                    android:id="@+id/edt_complemento"
+                    android:layout_width="150dp"
+                    android:layout_height="48dp"
+                    android:gravity="center"
+                    android:hint="Complemento"
+                    android:inputType="text" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/etd_bairro"
+                    android:layout_width="300dp"
+                    android:layout_height="48dp"
+                    android:gravity="center"
+                    android:hint="Bairro"
+                    android:inputType="text" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:id="@+id/edt_cidade"
+                    android:layout_width="170dp"
+                    android:layout_height="48dp"
+                    android:gravity="center"
+                    android:hint="Cidade"
+                    android:layout_marginRight="20dp"
+                    android:inputType="text" />
+
+                <EditText
+                    android:id="@+id/edt_uf"
+                    android:layout_width="110dp"
+                    android:hint="UF"
+                    android:gravity="center"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/edt_number"
-                android:layout_width="130dp"
-                android:layout_height="48dp"
-                android:layout_marginRight="20dp"
-                android:gravity="center"
-                android:hint="Número"
-                android:inputType="number" />
-
-            <EditText
-                android:id="@+id/edt_complemento"
-                android:layout_width="150dp"
-                android:layout_height="48dp"
-                android:gravity="center"
-                android:hint="Complemento"
-                android:inputType="text" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:gravity="center">
-
-            <EditText
-                android:id="@+id/etd_bairro"
-                android:layout_width="300dp"
-                android:layout_height="48dp"
-                android:gravity="center"
-                android:hint="Bairro"
-                android:inputType="text" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-
-            <EditText
-                android:id="@+id/edt_cidade"
-                android:layout_width="170dp"
-                android:layout_height="48dp"
-                android:gravity="center"
-                android:hint="Cidade"
-                android:layout_marginRight="20dp"
-                android:inputType="text" />
-
-            <EditText
-                android:id="@+id/edt_uf"
-                android:layout_width="110dp"
-                android:hint="UF"
-                android:gravity="center"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
 
         <EditText
             android:id="@+id/edt_volume"
