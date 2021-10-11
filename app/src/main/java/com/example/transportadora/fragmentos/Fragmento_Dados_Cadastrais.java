@@ -1,5 +1,6 @@
 package com.example.transportadora.fragmentos;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,12 +30,11 @@ import org.json.JSONObject;
 
 public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClickListener {
 
-    EditText user, pass, confirmaPass, cep, rua, numero, complemento, bairro, cidade;
-    Button editaUser, confirmaEdita, editaFatura, confirmaFatura, validaCEP, zerar;
+    EditText user, senha, pass, confirmaPass, cep, rua, numero, complemento, bairro, cidade;
+    Button editaUser, editaPass, confirmaEdita, editaFatura, confirmaFatura, validaCEP, zerar;
     LinearLayout linha1, linha2, linha3;
     ManipulaDB bd;
     Dados data;
-    String login;
     private RequestQueue mQueue;
 
     @Nullable
@@ -56,29 +56,57 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        //Font
+        Typeface fonte = Typeface.createFromAsset(getActivity().getAssets(), "fonts/IBMPlexSans-Bold.ttf");
+
         // Dados do Usuário
         user = getView().findViewById(R.id.conta_user);
+        user.setTypeface(fonte);
+        senha = getView().findViewById(R.id.conta_senha);
+        senha.setTypeface(fonte);
         pass = getView().findViewById(R.id.conta_pass);
+        pass.setTypeface(fonte);
         confirmaPass = getView().findViewById(R.id.conta_pass2);
+        confirmaPass.setTypeface(fonte);
+        editaPass = getView().findViewById(R.id.btn_edit_confirma);
+        editaPass.setText("TROQUE A SENHA");
+        editaPass.setTypeface(fonte);
         editaUser = getView().findViewById(R.id.btn_edt_user);
+        editaUser.setText("DADOS DE LOGIN");
+        editaUser.setTypeface(fonte);
         confirmaEdita = getView().findViewById(R.id.btn_cad_confirma);
+        confirmaEdita.setText("CONFIRMAR");
+        confirmaEdita.setTypeface(fonte);
 
         //Dados de Fatura
         editaFatura = getView().findViewById(R.id.btn_edt_fatura);
+        editaFatura.setText("DADOS DE FATURAMENTO");
+        editaFatura.setTypeface(fonte);
         confirmaFatura = getView().findViewById(R.id.btn_confirma_fat);
+        confirmaFatura.setText("CONFIRMAR");
+        confirmaFatura.setTypeface(fonte);
         cep = getView().findViewById(R.id.conta_cep);
+        cep.setTypeface(fonte);
         validaCEP = getView().findViewById(R.id.btn_conta_cep);
+        validaCEP.setText("VALIDE O CEP");
+        validaCEP.setTypeface(fonte);
 
         linha1 = getView().findViewById(R.id.linha1);
         rua = getView().findViewById(R.id.conta_rua);
+        rua.setTypeface(fonte);
         numero = getView().findViewById(R.id.conta_numero);
+        numero.setTypeface(fonte);
 
         linha2 = getView().findViewById(R.id.linha2);
         complemento = getView().findViewById(R.id.conta_complemento);
+        complemento.setTypeface(fonte);
         bairro = getView().findViewById(R.id.conta_bairro);
+        bairro.setTypeface(fonte);
 
         linha3 = getView().findViewById(R.id.linha3);
         cidade = getView().findViewById(R.id.conta_cidade);
+        cidade.setTypeface(fonte);
 
         Spinner estados = getView().findViewById(R.id.conta_estado);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter
@@ -90,14 +118,15 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
         //Botões voltar
         zerar = getView().findViewById(R.id.btn_zerar);
 
-
-
         editaUser.setOnClickListener(this);
+        editaPass.setOnClickListener(this);
         confirmaEdita.setOnClickListener(this);
         editaFatura.setOnClickListener(this);
         confirmaFatura.setOnClickListener(this);
         zerar.setOnClickListener(this);
         validaCEP.setOnClickListener(this);
+        user.setOnClickListener(this);
+        senha.setOnClickListener(this);
 
 
 
@@ -106,23 +135,39 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
     @Override
     public void onClick (View view){
         switch (view.getId()) {
+            case R.id.conta_user:
+                if(user.getText().toString() == data.getLogin()) {
+                    user.setText("Seu Usuário");
+                } else {
+                    user.setText(data.getLogin());
+                }
+            break;
+            case R.id.conta_senha:
+                if(senha.getText().toString() == bd.getPass(data.getLogin())){
+                    senha.setText("Sua Senha");
+                } else {
+                    senha.setText(bd.getPass(data.getLogin()));
+                }
+            break;
             case R.id.btn_edt_user:
                 Button checa = getView().findViewById(R.id.btn_confirma_fat);
                 if(checa.getVisibility() == View.GONE) {
-                    Button btn = getView().findViewById(R.id.btn_edt_user);
-                    btn.setVisibility(View.GONE);
-                    EditText user_1 = getView().findViewById(R.id.conta_user);
-                    user_1.setVisibility(View.VISIBLE);
-                    user_1.setText(getLogin());
-                    EditText pass_1 = getView().findViewById(R.id.conta_pass);
-                    pass_1.setVisibility(View.VISIBLE);
-                    EditText confirmaPass_1 = getView().findViewById(R.id.conta_pass2);
-                    confirmaPass_1.setVisibility(View.VISIBLE);
-                    Button btn2 = getView().findViewById(R.id.btn_cad_confirma);
-                    btn2.setVisibility(View.VISIBLE);
+                    editaUser.setVisibility(View.GONE);
+                    user.setVisibility(View.VISIBLE);
+                    user.setText("Seu usuário");
+                    senha.setVisibility(View.VISIBLE);
+                    senha.setText("Sua senha");
+                    editaPass.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(getActivity(), "Termine a ação anterior ", Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case R.id.btn_edit_confirma:
+                senha.setVisibility(View.GONE);
+                editaPass.setVisibility(View.GONE);
+                pass.setVisibility(View.VISIBLE);
+                confirmaPass.setVisibility(View.VISIBLE);
+                confirmaEdita.setVisibility(View.VISIBLE);
                 break;
             case R.id.btn_cad_confirma:
                 Button btn_1 = getView().findViewById(R.id.btn_edt_user);
@@ -157,20 +202,14 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
             case R.id.btn_edt_fatura:
                 Button checa2 = getView().findViewById(R.id.btn_cad_confirma);
                 if(checa2.getVisibility() == View.GONE) {
-                    Button btn3 = getView().findViewById(R.id.btn_edt_fatura);
-                    Button btn4 = getView().findViewById(R.id.btn_confirma_fat);
-                    Button valida = getView().findViewById(R.id.btn_conta_cep);
-                    LinearLayout linha1 = getView().findViewById(R.id.linha1);
-                    LinearLayout linha2 = getView().findViewById(R.id.linha2);
-                    LinearLayout linha3 = getView().findViewById(R.id.linha3);
-                    EditText CEP = getView().findViewById(R.id.conta_cep);
-                    btn3.setVisibility(View.GONE);
-                    btn4.setVisibility(View.VISIBLE);
-                    valida.setVisibility(View.VISIBLE);
+                    editaUser.setVisibility(View.GONE);
+                    editaFatura.setVisibility(View.GONE);
+                    confirmaFatura.setVisibility(View.VISIBLE);
+                    validaCEP.setVisibility(View.VISIBLE);
                     linha1.setVisibility(View.VISIBLE);
                     linha2.setVisibility(View.VISIBLE);
                     linha3.setVisibility(View.VISIBLE);
-                    CEP.setVisibility(View.VISIBLE);
+                    cep.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(getActivity(), "Termine a ação anterior ", Toast.LENGTH_SHORT).show();
                 }
@@ -180,50 +219,34 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
                 String Cep = cep.getText().toString();
                 if(bd.updateRegiao(CNPJ,Cep)){
                     Toast.makeText(getActivity(),"CEP Atualizado", Toast.LENGTH_SHORT).show();
-                    Button btn3_1 = getView().findViewById(R.id.btn_edt_fatura);
-                    Button btn4_1 = getView().findViewById(R.id.btn_confirma_fat);
-                    Button valida_1 = getView().findViewById(R.id.btn_conta_cep);
-                    LinearLayout linha1_1 = getView().findViewById(R.id.linha1);
-                    LinearLayout linha2_1 = getView().findViewById(R.id.linha2);
-                    LinearLayout linha3_1 = getView().findViewById(R.id.linha3);
-                    EditText CEP_1 = getView().findViewById(R.id.conta_cep);
-                    btn3_1.setVisibility(View.VISIBLE);
-                    btn4_1.setVisibility(View.GONE);
-                    valida_1.setVisibility(View.GONE);
-                    linha1_1.setVisibility(View.GONE);
-                    linha2_1.setVisibility(View.GONE);
-                    linha3_1.setVisibility(View.GONE);
-                    CEP_1.setVisibility(View.GONE);
+                    editaFatura.setVisibility(View.VISIBLE);
+                    confirmaFatura.setVisibility(View.GONE);
+                    validaCEP.setVisibility(View.GONE);
+                    linha1.setVisibility(View.GONE);
+                    linha2.setVisibility(View.GONE);
+                    linha3.setVisibility(View.GONE);
+                    cep.setVisibility(View.GONE);
                 } else {
                     Toast.makeText(getActivity(),"CEP Incorreto", Toast.LENGTH_SHORT).show();
                 }
 
                 break;
             case R.id.btn_zerar:
-                Button btn_u = getView().findViewById(R.id.btn_edt_user);
-                btn_u.setVisibility(View.VISIBLE);
-                EditText user_u = getView().findViewById(R.id.conta_user);
-                user_u.setVisibility(View.GONE);
-                EditText pass_u = getView().findViewById(R.id.conta_pass);
-                pass_u.setVisibility(View.GONE);
-                EditText confirmaPass_u = getView().findViewById(R.id.conta_pass2);
-                confirmaPass_u.setVisibility(View.GONE);
-                Button btn2_u = getView().findViewById(R.id.btn_cad_confirma);
-                btn2_u.setVisibility(View.GONE);
-                Button btn3_f = getView().findViewById(R.id.btn_edt_fatura);
-                btn3_f.setVisibility(View.VISIBLE);
-                Button btn4_f = getView().findViewById(R.id.btn_confirma_fat);
-                btn4_f.setVisibility(View.GONE);
-                Button valida_f = getView().findViewById(R.id.btn_conta_cep);
-                valida_f.setVisibility(View.GONE);
-                LinearLayout linha1_f = getView().findViewById(R.id.linha1);
-                linha1_f.setVisibility(View.GONE);
-                LinearLayout linha2_f = getView().findViewById(R.id.linha2);
-                linha2_f.setVisibility(View.GONE);
-                LinearLayout linha3_f = getView().findViewById(R.id.linha3);
-                linha3_f.setVisibility(View.GONE);
-                EditText CEP_f = getView().findViewById(R.id.conta_cep);
-                CEP_f.setVisibility(View.GONE);
+                editaUser.setVisibility(View.VISIBLE);
+                user.setVisibility(View.GONE);
+                EditText senha_u = getView().findViewById(R.id.conta_senha);
+                senha_u.setVisibility(View.GONE);
+                pass.setVisibility(View.GONE);
+                confirmaPass.setVisibility(View.GONE);
+                editaPass.setVisibility(View.GONE);
+                confirmaEdita.setVisibility(View.GONE);
+                editaFatura.setVisibility(View.VISIBLE);
+                confirmaFatura.setVisibility(View.GONE);
+                validaCEP.setVisibility(View.GONE);
+                linha1.setVisibility(View.GONE);
+                linha2.setVisibility(View.GONE);
+                linha3.setVisibility(View.GONE);
+                cep.setVisibility(View.GONE);
                 break;
             case R.id.btn_conta_cep: //Valida CEP
                 String url = "https://viacep.com.br/ws/" + cep.getText().toString() + "/json/";
@@ -231,14 +254,6 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
                 break;
         }
 
-    }
-
-    public String getLogin () {
-        return login;
-    }
-
-    public void setLogin (String login){
-        this.login = login;
     }
 
     public Boolean confirmaPass(String senha, String confirma) {
