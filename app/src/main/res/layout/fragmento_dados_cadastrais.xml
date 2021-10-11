@@ -15,19 +15,29 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="Login"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:visibility="visible"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginTop="20dp"/>
 
         <EditText
             android:id="@+id/conta_user"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="16dp"
-            android:gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
             android:text="Seu usuário"
+            android:textSize="22sp"
+            android:inputType="text"
+            android:focusable="false"
+            android:visibility="gone"/>
+
+        <EditText
+            android:id="@+id/conta_senha"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:hint="Sua senha"
             android:textSize="22sp"
             android:inputType="text"
             android:focusable="false"
@@ -37,9 +47,8 @@
             android:id="@+id/conta_pass"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="16dp"
-            android:gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
             android:hint="Edite sua senha"
             android:textSize="22sp"
             android:inputType="text"
@@ -49,8 +58,7 @@
             android:id="@+id/conta_pass2"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="20dp"
             android:gravity="center_horizontal"
             android:hint="Confirme sua senha"
             android:textSize="22sp"
@@ -58,21 +66,30 @@
             android:visibility="gone"/>
 
         <Button
+            android:id="@+id/btn_edit_confirma"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Troque a senha"
+            android:textSize="18dp"
+            android:visibility="gone"
+            android:layout_marginTop="20dp"/>
+
+        <Button
             android:id="@+id/btn_cad_confirma"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="confirmar"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:visibility="gone"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginTop="20dp"/>
 
         <Button
             android:id="@+id/btn_edt_fatura"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="Faturamento"
-            android:textSize="20dp"
-            android:layout_marginBottom="20dp"
+            android:text="DADOS DE Faturamento"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
             android:visibility="visible"/>
 
         <EditText
@@ -81,6 +98,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:hint="CEP de Coleta"
+            android:layout_marginTop="20dp"
             android:inputType="number"
             android:visibility="gone"/>
 
@@ -89,7 +107,8 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="18dp"
+            android:layout_marginTop="20dp"
             android:text="Valida cep"
             android:visibility="gone"/>
 
@@ -198,7 +217,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="confirmar"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:visibility="gone"
             android:layout_marginBottom="20dp"/>
 
