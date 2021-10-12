@@ -2,15 +2,13 @@ package com.example.transportadora.fragmentos;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -30,9 +28,9 @@ import org.json.JSONObject;
 
 public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClickListener {
 
-    EditText user, senha, pass, confirmaPass, cep, rua, numero, complemento, bairro, cidade;
+    EditText user, senha, pass, confirmaPass, cep, rua, numero, complemento, bairro, cidade, estado;
     Button editaUser, editaPass, confirmaEdita, editaFatura, confirmaFatura, validaCEP, zerar;
-    LinearLayout linha1, linha2, linha3;
+    LinearLayout linha1;
     ManipulaDB bd;
     Dados data;
     private RequestQueue mQueue;
@@ -89,31 +87,24 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
         cep = getView().findViewById(R.id.conta_cep);
         cep.setTypeface(fonte);
         validaCEP = getView().findViewById(R.id.btn_conta_cep);
-        validaCEP.setText("VALIDE O CEP");
+        validaCEP.setText("ALTERAR O CEP");
         validaCEP.setTypeface(fonte);
 
+        //Dados de Região
         linha1 = getView().findViewById(R.id.linha1);
         rua = getView().findViewById(R.id.conta_rua);
         rua.setTypeface(fonte);
         numero = getView().findViewById(R.id.conta_numero);
         numero.setTypeface(fonte);
-
-        linha2 = getView().findViewById(R.id.linha2);
         complemento = getView().findViewById(R.id.conta_complemento);
         complemento.setTypeface(fonte);
         bairro = getView().findViewById(R.id.conta_bairro);
         bairro.setTypeface(fonte);
-
-        linha3 = getView().findViewById(R.id.linha3);
         cidade = getView().findViewById(R.id.conta_cidade);
         cidade.setTypeface(fonte);
+        estado = getView().findViewById(R.id.conta_estado);
+        estado.setTypeface(fonte);
 
-        Spinner estados = getView().findViewById(R.id.conta_estado);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter
-                .createFromResource(getActivity(),
-                        R.array.states,
-                        android.R.layout.simple_spinner_item);
-        estados.setAdapter(adapter);
 
         //Botões voltar
         zerar = getView().findViewById(R.id.btn_zerar);
@@ -179,7 +170,6 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
                 if (senha.equals("") || confirma.equals("")) {
                     Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
                 } else if (confirmaPass(senha, confirma) == true) {
-                    Log.i("Msg", "senha:" + senha + " e " + confirma);
                     if(!bd.isUserPass(usuario, senha)){
                         redefineSenha(usuario, senha);
                         pass_2.setText("");
@@ -197,16 +187,24 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
                 }
                 break;
             case R.id.btn_edt_fatura:
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (cep.getText().toString() != getCEP()){
+                            String CEP = getCEP().replaceAll("[-]","");
+                            cep.setText(CEP);
+                            String url = "https://viacep.com.br/ws/" + cep.getText().toString() + "/json/";
+                            jsonCEP(url);
+                        }
+                    }
+                }, 0);
                 Button checa2 = getView().findViewById(R.id.btn_cad_confirma);
                 if(checa2.getVisibility() == View.GONE) {
                     editaUser.setVisibility(View.GONE);
                     editaFatura.setVisibility(View.GONE);
                     confirmaFatura.setVisibility(View.VISIBLE);
-                    validaCEP.setVisibility(View.VISIBLE);
                     linha1.setVisibility(View.VISIBLE);
-                    linha2.setVisibility(View.VISIBLE);
-                    linha3.setVisibility(View.VISIBLE);
-                    cep.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(getActivity(), "Termine a ação anterior ", Toast.LENGTH_SHORT).show();
                 }
@@ -218,11 +216,7 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
                     Toast.makeText(getActivity(),"CEP Atualizado", Toast.LENGTH_SHORT).show();
                     editaFatura.setVisibility(View.VISIBLE);
                     confirmaFatura.setVisibility(View.GONE);
-                    validaCEP.setVisibility(View.GONE);
                     linha1.setVisibility(View.GONE);
-                    linha2.setVisibility(View.GONE);
-                    linha3.setVisibility(View.GONE);
-                    cep.setVisibility(View.GONE);
                 } else {
                     Toast.makeText(getActivity(),"CEP Incorreto", Toast.LENGTH_SHORT).show();
                 }
@@ -239,11 +233,7 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
                 confirmaEdita.setVisibility(View.GONE);
                 editaFatura.setVisibility(View.VISIBLE);
                 confirmaFatura.setVisibility(View.GONE);
-                validaCEP.setVisibility(View.GONE);
                 linha1.setVisibility(View.GONE);
-                linha2.setVisibility(View.GONE);
-                linha3.setVisibility(View.GONE);
-                cep.setVisibility(View.GONE);
                 break;
             case R.id.btn_conta_cep: //Valida CEP
                 String url = "https://viacep.com.br/ws/" + cep.getText().toString() + "/json/";
@@ -251,6 +241,10 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
                 break;
         }
 
+    }
+
+    public String getCEP(){
+        return bd.getRegiao(bd.getCNPJ(data.getLogin()));
     }
 
     public Boolean confirmaPass(String senha, String confirma) {
@@ -272,6 +266,7 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
             String jsonrua; // json logradouro
             String jsonbairro; // json bairro
             String jsoncidade; // json cidade
+            String jsonuf; // jsonUF
 
 
             @Override
@@ -281,11 +276,13 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
                     jsonrua = response.getString("logradouro");
                     jsonbairro = response.getString("bairro");
                     jsoncidade = response.getString("localidade");
+                    jsonuf = response.getString("uf");
 
                     cep.setText(jsoncep);
                     rua.setText(jsonrua);
                     bairro.setText(jsonbairro);
                     cidade.setText(jsoncidade);
+                    estado.setText(jsonuf);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -294,6 +291,7 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
                     rua.setText("");
                     bairro.setText("");
                     cidade.setText("");
+                    estado.setText("");
                 }
             }
         }, erro -> {
@@ -303,6 +301,7 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
             rua.setText("");
             bairro.setText("");
             cidade.setText("");
+            estado.setText("");
         });
 
         mQueue.add(request);
