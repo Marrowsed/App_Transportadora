@@ -127,9 +127,6 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
         validaCEP.setOnClickListener(this);
         user.setOnClickListener(this);
         senha.setOnClickListener(this);
-
-
-
     }
 
     @Override
