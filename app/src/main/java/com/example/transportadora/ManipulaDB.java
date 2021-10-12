@@ -229,7 +229,7 @@ public class ManipulaDB extends SQLiteOpenHelper {
 
     public String getRegiao (String CNPJ){
         SQLiteDatabase bd = this.getWritableDatabase();
-        Cursor cursor = bd.rawQuery("Select nome from pjdata where CNPJ = ?", new String[] {CNPJ});
+        Cursor cursor = bd.rawQuery("Select regiao from pjdata where CNPJ = ?", new String[] {CNPJ});
         if(cursor!=null && cursor.getCount() > 0) {
             if (cursor.moveToFirst()) {
                 do {
