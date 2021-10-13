@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,56 +11,48 @@
         android:gravity="center"
         android:orientation="vertical">
 
-
-        <TextView
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Transportadora"
-            android:textSize="32sp" />
+            android:src="@drawable/ic_your_company_logo"/>
 
         <EditText
             android:id="@+id/edt_user"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="20dp"
             android:hint="Digite seu usuário"
+            android:gravity="center"
             android:inputType="text"
             android:textSize="22sp" />
 
         <EditText
             android:id="@+id/edt_pass"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="28dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
             android:hint="Digite sua senha"
             android:inputType="textPassword"
             android:textSize="22sp" />
 
         <Button
             android:id="@+id/btn_login"
-            android:layout_width="128dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:textSize="18dp"
             android:text="FAÇA LOGIN" />
 
         <Button
-            android:id="@+id/btn_forgot"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="Clique aqui para fazer seu cadastro !" />
-
-        <Button
             android:id="@+id/btn_track"
-            android:layout_width="350dp"
+            android:layout_width="300dp"
+            android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
             android:gravity="center|bottom"
-            android:text="Clique Aqui para rastrear seu pedido" />
+            android:textSize="18dp"
+            android:text="Rastrear seu pedido" />
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

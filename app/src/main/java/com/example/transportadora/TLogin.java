@@ -3,6 +3,7 @@ package com.example.transportadora;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -23,24 +24,30 @@ import com.google.android.material.navigation.NavigationView;
 public class TLogin extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-    Button login, cadastrar, rastrear;
+    Button login, rastrear;
     EditText user, pass;
     private DrawerLayout drawer;
     ManipulaDB BD;
     Dados data;
-    String usuario;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tlogin);
+        //Font
+        Typeface fonte = Typeface.createFromAsset(getAssets(), "fonts/IBMPlexSans-Bold.ttf");
 
         login = findViewById(R.id.btn_login);
+        login.setText("FAÇA LOGIN");
+        login.setTypeface(fonte);
         user = findViewById(R.id.edt_user);
+        user.setTypeface(fonte);
         pass = findViewById(R.id.edt_pass);
-        cadastrar = findViewById(R.id.btn_forgot);
+        pass.setTypeface(fonte);
         rastrear = findViewById(R.id.btn_track);
+        rastrear.setText("RASTREIE SEU PEDIDO");
+        rastrear.setTypeface(fonte);
         BD = new ManipulaDB(this);
         data = new Dados();
 
@@ -56,10 +63,6 @@ public class TLogin extends AppCompatActivity
             }
         });
 
-        cadastrar.setOnClickListener(view -> {
-            Intent it = new Intent(TLogin.this, TCadastra.class);
-            startActivity(it);
-        });
 
         rastrear.setOnClickListener(view -> {
             String uri = "https://www.google.com/search?client=firefox-b-d&q=rastreio+"; //Track Link - Link para rastreio
