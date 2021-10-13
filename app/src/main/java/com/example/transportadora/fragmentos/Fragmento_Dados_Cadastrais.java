@@ -124,15 +124,15 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
     public void onClick (View view){
         switch (view.getId()) {
             case R.id.conta_user:
-                if(user.getText().toString() == data.getLogin()) {
-                    user.setText("Seu Usuário");
+                if(user.getText().toString().equals(data.getLogin())) {
+                    user.setText("Clique para ver seu usuário");
                 } else {
                     user.setText(data.getLogin());
                 }
             break;
             case R.id.conta_senha:
-                if(senha.getText().toString() == bd.getPass(data.getLogin())){
-                    senha.setText("Sua Senha");
+                if(senha.getText().toString().equals(bd.getPass(data.getLogin()))){
+                    senha.setText("Clique para ver sua senha");
                 } else {
                     senha.setText(bd.getPass(data.getLogin()));
                 }
@@ -142,9 +142,9 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
                 if(checa.getVisibility() == View.GONE) {
                     editaUser.setVisibility(View.GONE);
                     user.setVisibility(View.VISIBLE);
-                    user.setText("Seu usuário");
+                    user.setText("Clique para ver seu usuário");
                     senha.setVisibility(View.VISIBLE);
-                    senha.setText("Sua senha");
+                    senha.setText("Clique para ver sua senha");
                     editaPass.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(getActivity(), "Termine a ação anterior ", Toast.LENGTH_SHORT).show();
