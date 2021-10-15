@@ -14,7 +14,7 @@
                 android:icon="@android:drawable/ic_dialog_email"
                 android:title="@string/btn_contato" />
             <item
-                android:id="@+id/nav_forgot"
+                android:id="@+id/nav_register"
                 android:title="Registre-se !"
                 android:icon="?attr/actionModePasteDrawable"/>
         </menu>

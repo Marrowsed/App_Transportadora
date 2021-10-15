@@ -45,7 +45,7 @@
             android:text="FAÇA LOGIN" />
 
         <Button
-            android:id="@+id/btn_track"
+            android:id="@+id/btn_esqueci"
             android:layout_width="300dp"
             android:layout_marginTop="20dp"
             android:layout_height="wrap_content"
