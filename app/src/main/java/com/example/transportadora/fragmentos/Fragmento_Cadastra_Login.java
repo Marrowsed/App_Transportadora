@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -83,7 +84,7 @@ public class Fragmento_Cadastra_Login extends Fragment implements View.OnClickLi
 
     public Boolean isUser(String user){
         Boolean checa = bd.isUser(user);
-        if (checa == false) {
+        if (!checa) {
                 Toast.makeText(getActivity(), "Usuário permitido", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), "Usuário já existente !", Toast.LENGTH_SHORT).show();
@@ -92,8 +93,8 @@ public class Fragmento_Cadastra_Login extends Fragment implements View.OnClickLi
     }
 
     public Boolean confirmaPass(String senha, String confirma){
-        Boolean confirmar = senha.equals(confirma);
-        if (confirmar == true){
+        boolean confirmar = senha.equals(confirma);
+        if (confirmar){
             return true;
         } else {
             return false;
@@ -103,9 +104,9 @@ public class Fragmento_Cadastra_Login extends Fragment implements View.OnClickLi
     public Boolean cadastraUser(String user, String pass, String CNPJ) {
         isUser(user);
         Boolean checa = bd.isUserPass(user, pass);
-        if (checa == false) {
+        if (!checa) {
             Boolean inserir = bd.inserirDados(user, pass, CNPJ);
-            if (inserir == true) {
+            if (inserir) {
                 Toast.makeText(getActivity(), "Cadastro criado com sucesso", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), "Cadastro já existente !", Toast.LENGTH_SHORT).show();
@@ -126,9 +127,9 @@ public class Fragmento_Cadastra_Login extends Fragment implements View.OnClickLi
 
                 if (usuario.equals("") || senha.equals("") || confirma.equals("")) {
                     Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
-                } else if(checa == false) {
+                } else if(!checa) {
                     validateUser(usuario);
-                    if (validatePass(senha) && confirmaPass(senha, confirma) == true) {
+                    if (validatePass(senha) && confirmaPass(senha, confirma)) {
                         cadastraUser(usuario, senha, CNPJ);
                         data.setLogin(usuario);
                         Intent it = new Intent(getActivity(), TAcesso.class);
@@ -139,14 +140,11 @@ public class Fragmento_Cadastra_Login extends Fragment implements View.OnClickLi
                     Toast.makeText(getActivity(), "Usuário já existente !", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.cad_pass:
-                Handler handler = new Handler();
+                Handler handler = new Handler(Looper.getMainLooper());
                 txt_pass.setVisibility(View.VISIBLE);
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(txt_pass.getVisibility() == View.VISIBLE){
-                            txt_pass.setVisibility(View.GONE);
-                        }
+                handler.postDelayed(() -> {
+                    if(txt_pass.getVisibility() == View.VISIBLE){
+                        txt_pass.setVisibility(View.GONE);
                     }
                 }, 5000);
                 break;
@@ -156,23 +154,20 @@ public class Fragmento_Cadastra_Login extends Fragment implements View.OnClickLi
     public static String validateUser (String user){
         String regex = "\\s+";
         String regexu = user.replaceAll(regex, "");
-        String userf = Normalizer.normalize(regexu, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
-        return userf;
+        return Normalizer.normalize(regexu, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
     }
 
     public static Boolean validatePass (String senha){
         String regex = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
         //8 dígitos, sem espaços, Pelo menos: 1 Letra maíuscula, 1 Letra Miníscula,  1 Especial, 1 Número
+        //Ex: 12345Aa@
         Pattern senhap = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-        CharSequence senhac = senha;
-        Matcher senham = senhap.matcher(senhac);
-        Boolean isPass = false;
+        Matcher senham = senhap.matcher(senha);
         if(senham.matches()){
-            isPass = true;
+            return true;
         } else {
             return false;
         }
-        return isPass;
     }
 
     @Override

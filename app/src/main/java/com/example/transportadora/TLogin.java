@@ -17,14 +17,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.example.transportadora.fragmentos.Fragmento_Esqueci_Senha;
 import com.google.android.material.navigation.NavigationView;
 
 
 public class TLogin extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-    Button login, rastrear;
+    Button login, esqueci;
     EditText user, pass;
     private DrawerLayout drawer;
     ManipulaDB BD;
@@ -45,9 +48,9 @@ public class TLogin extends AppCompatActivity
         user.setTypeface(fonte);
         pass = findViewById(R.id.edt_pass);
         pass.setTypeface(fonte);
-        rastrear = findViewById(R.id.btn_track);
-        rastrear.setText("RASTREIE SEU PEDIDO");
-        rastrear.setTypeface(fonte);
+        esqueci = findViewById(R.id.btn_esqueci);
+        esqueci.setText("ESQUECI MINHA SENHA");
+        esqueci.setTypeface(fonte);
         BD = new ManipulaDB(this);
         data = new Dados();
 
@@ -64,11 +67,11 @@ public class TLogin extends AppCompatActivity
         });
 
 
-        rastrear.setOnClickListener(view -> {
-            String uri = "https://www.google.com/search?client=firefox-b-d&q=rastreio+"; //Track Link - Link para rastreio
-            Intent it = new Intent(Intent.ACTION_VIEW);
-            it.setData(Uri.parse(uri));
-            startActivity(it);
+        esqueci.setOnClickListener(view -> {
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction transaction = fm.beginTransaction();
+            transaction.replace(R.id.drawer_layout_login, new Fragmento_Esqueci_Senha());
+            transaction.commit();
         });
 
         //Barra de cima
@@ -109,7 +112,7 @@ public class TLogin extends AppCompatActivity
             case R.id.nav_contato:
                 isWhatsApp();
                 break;
-            case R.id.nav_forgot:
+            case R.id.nav_register:
                 Intent cadastra = new Intent(TLogin.this, TCadastra.class);
                 startActivity(cadastra);
                 break;

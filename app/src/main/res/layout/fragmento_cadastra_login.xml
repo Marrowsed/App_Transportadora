@@ -22,14 +22,6 @@
             android:textSize="22sp"
             android:inputType="text"/>
 
-        <TextView
-            android:id="@+id/txt_pass"
-            android:layout_width="300dp"
-            android:layout_height="match_parent"
-            android:text="DICA SENHA"
-            android:textStyle="bold"
-            android:visibility="gone"/>
-
         <EditText
             android:id="@+id/cad_pass"
             android:layout_width="300dp"
@@ -52,6 +44,14 @@
             android:hint="Confirme sua senha"
             android:inputType="textPassword"
             android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/txt_pass"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:text="DICA SENHA"
+            android:textStyle="bold"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/btn_final"
