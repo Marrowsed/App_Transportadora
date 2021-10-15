@@ -29,9 +29,7 @@ public class TAcesso extends AppCompatActivity
 
     private DrawerLayout drawer;
     TextView home;
-    String Login;
     ManipulaDB bd;
-    Fragmento_Dados_Cadastrais fc;
     Dados data;
 
     @Override
@@ -46,7 +44,7 @@ public class TAcesso extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         //Help button - Botão de Ajuda
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
             Intent it = new Intent(TAcesso.this, TLogin.class);
             startActivity(it);
@@ -64,8 +62,7 @@ public class TAcesso extends AppCompatActivity
         toggle.syncState();
 
         home = findViewById(R.id.txt_home);
-        String usuario = data.getLogin();
-        home.setText("Olá, " + bd.getNome(bd.getCNPJ(usuario)) + " !");
+        home.setText("Olá, " + bd.getNome(bd.getCNPJ(data.getLogin())) + " !");
 
     }
 
@@ -127,13 +124,5 @@ public class TAcesso extends AppCompatActivity
             it.setData(Uri.parse(wp));
             startActivity(it);
         }
-    }
-
-    public void setLogin(String Login){
-        this.Login = Login;
-    }
-
-    public String getLogin(){
-        return Login;
     }
 }
