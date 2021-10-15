@@ -1,12 +1,5 @@
 package com.example.transportadora;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,6 +7,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.transportadora.fragmentos.Fragmento_Cadastra_User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -45,7 +45,7 @@ public class TCadastra extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_cadastra);
+        FloatingActionButton fab = findViewById(R.id.fab_cadastra);
         fab.setOnClickListener(v -> {
             Intent it = new Intent (TCadastra.this, TLogin.class);
             startActivity(it);
