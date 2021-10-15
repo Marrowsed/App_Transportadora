@@ -7,17 +7,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50sp"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/fgt_user"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="16dp"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:hint="Seu usuário"
             android:textSize="22sp"
             android:inputType="text"/>
@@ -26,16 +23,27 @@
             android:id="@+id/fgt_pass"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="28dp"
-            android:gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
             android:hint="Digite sua senha"
             android:inputType="textPassword"
             android:textSize="22sp" />
 
+        <TextView
+            android:id="@+id/fgt_txt"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:text="DICA SENHA"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
         <Button
             android:id="@+id/fgt_btn"
+            android:layout_marginTop="20dp"
             android:layout_width="300dp"
+            android:textSize="18dp"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="Redefina a senha" />
