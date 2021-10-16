@@ -3,6 +3,7 @@ package com.example.transportadora.fragmentos;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,6 +87,15 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
         confirmaFatura.setTypeface(fonte);
         cep = getView().findViewById(R.id.conta_cep);
         cep.setTypeface(fonte);
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(() -> {
+            if (!cep.getText().toString().equals(getCEP())){
+                String CEP = getCEP().replaceAll("[-]","");
+                cep.setText(CEP);
+                String url = "https://viacep.com.br/ws/" + cep.getText().toString() + "/json/";
+                jsonCEP(url);
+            }
+        });
         validaCEP = getView().findViewById(R.id.btn_conta_cep);
         validaCEP.setText("ALTERAR O CEP");
         validaCEP.setTypeface(fonte);
@@ -116,20 +126,12 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
         confirmaFatura.setOnClickListener(this);
         zerar.setOnClickListener(this);
         validaCEP.setOnClickListener(this);
-        user.setOnClickListener(this);
         senha.setOnClickListener(this);
     }
 
     @Override
     public void onClick (View view){
         switch (view.getId()) {
-            case R.id.conta_user:
-                if(user.getText().toString().equals(data.getLogin())) {
-                    user.setText("Clique para ver seu usuário");
-                } else {
-                    user.setText(data.getLogin());
-                }
-            break;
             case R.id.conta_senha:
                 if(senha.getText().toString().equals(bd.getPass(data.getLogin()))){
                     senha.setText("Clique para ver sua senha");
@@ -142,7 +144,7 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
                 if(checa.getVisibility() == View.GONE) {
                     editaUser.setVisibility(View.GONE);
                     user.setVisibility(View.VISIBLE);
-                    user.setText("Clique para ver seu usuário");
+                    user.setText(data.getLogin());
                     senha.setVisibility(View.VISIBLE);
                     senha.setText("Clique para ver sua senha");
                     editaPass.setVisibility(View.VISIBLE);
@@ -158,27 +160,22 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
                 confirmaEdita.setVisibility(View.VISIBLE);
                 break;
             case R.id.btn_cad_confirma:
-                Button btn_1 = getView().findViewById(R.id.btn_edt_user);
-                Button btn2_1 = getView().findViewById(R.id.btn_cad_confirma);
-                EditText user_2 = getView().findViewById(R.id.conta_user);
-                EditText pass_2 = getView().findViewById(R.id.conta_pass);
-                EditText confirmaPass_2 = getView().findViewById(R.id.conta_pass2);
-                String usuario = user_2.getText().toString();
-                String senha = pass_2.getText().toString();
-                String confirma = confirmaPass_2.getText().toString();
+                String usuario = user.getText().toString();
+                String senha = pass.getText().toString();
+                String confirma = confirmaPass.getText().toString();
 
                 if (senha.equals("") || confirma.equals("")) {
                     Toast.makeText(getActivity(), "Credenciais Inválidas", Toast.LENGTH_SHORT).show();
-                } else if (confirmaPass(senha, confirma) == true) {
+                } else if (confirmaPass(senha, confirma)) {
                     if(!bd.isUserPass(usuario, senha)){
                         redefineSenha(usuario, senha);
-                        pass_2.setText("");
-                        confirmaPass_2.setText("");
-                        btn_1.setVisibility(View.VISIBLE);
-                        btn2_1.setVisibility(View.GONE);
-                        user_2.setVisibility(View.GONE);
-                        pass_2.setVisibility(View.GONE);
-                        confirmaPass_2.setVisibility(View.GONE);
+                        pass.setText("");
+                        confirmaPass.setText("");
+                        editaUser.setVisibility(View.VISIBLE);
+                        confirmaEdita.setVisibility(View.GONE);
+                        confirmaPass.setVisibility(View.GONE);
+                        user.setVisibility(View.GONE);
+                        pass.setVisibility(View.GONE);
                     } else {
                         Toast.makeText(getActivity(), "Senha em uso", Toast.LENGTH_SHORT).show();
                     }
@@ -187,18 +184,6 @@ public class Fragmento_Dados_Cadastrais extends Fragment implements View.OnClick
                 }
                 break;
             case R.id.btn_edt_fatura:
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (cep.getText().toString() != getCEP()){
-                            String CEP = getCEP().replaceAll("[-]","");
-                            cep.setText(CEP);
-                            String url = "https://viacep.com.br/ws/" + cep.getText().toString() + "/json/";
-                            jsonCEP(url);
-                        }
-                    }
-                }, 0);
                 Button checa2 = getView().findViewById(R.id.btn_cad_confirma);
                 if(checa2.getVisibility() == View.GONE) {
                     editaUser.setVisibility(View.GONE);
