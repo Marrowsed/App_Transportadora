@@ -19,7 +19,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.transportadora.Dados;
@@ -126,7 +125,6 @@ public class Fragmento_Cadastra_User extends Fragment implements View.OnClickLis
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
             String jsonr; //json razao
-            String jsonc; // json cnpj
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -139,13 +137,10 @@ public class Fragmento_Cadastra_User extends Fragment implements View.OnClickLis
                     razao.setText("");
                 }
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError erro) {
-                erro.printStackTrace();
-                Toast.makeText(getActivity(), "CNPJ Inválido ! ", Toast.LENGTH_SHORT).show();
-                razao.setText("");
-            }
+        }, erro -> {
+            erro.printStackTrace();
+            Toast.makeText(getActivity(), "CNPJ Inválido ! ", Toast.LENGTH_SHORT).show();
+            razao.setText("");
         });
 
         mQueue.add(request);
@@ -156,9 +151,9 @@ public class Fragmento_Cadastra_User extends Fragment implements View.OnClickLis
         validateNome(nome);
         validateSobrenome(sobrenome);
         Boolean checa = bd.isDataPJ(CNPJ);
-        if (checa == false) {
+        if (!checa) {
             Boolean inserir = bd.inserirPJ(validateNome(nome), validateSobrenome(sobrenome), email, CNPJ, razao, volume, regiao, categoria);
-            if (inserir == true) {
+            if (inserir) {
                 Toast.makeText(getActivity(), "CNPJ em Validação", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), "CNPJ Inválido", Toast.LENGTH_SHORT).show();
@@ -171,35 +166,29 @@ public class Fragmento_Cadastra_User extends Fragment implements View.OnClickLis
     public Boolean validateEmail (String email){
         String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         Pattern emailp = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-        CharSequence emailc = email;
-        Matcher emailm = emailp.matcher(emailc);
-        Boolean isEmail = false;
+        Matcher emailm = emailp.matcher(email);
         if (emailm.matches()) {
-            isEmail = true;
+            return true;
         } else {
             return false;
         }
-        return isEmail;
+
     }
 
     public static String validateNome(String nome){
         String regex = "\\s+";
-        nome.toLowerCase();
         String nomef = nome.replaceAll(regex, "");
         String Nome = nomef.substring(0, 1).toUpperCase() + nomef.substring(1);
         String min = Nome.toLowerCase();
-        String last = min.substring(0, 1).toUpperCase() + min.substring(1);
-        return last;
+        return min.substring(0, 1).toUpperCase() + min.substring(1);
     }
 
     public static String validateSobrenome(String sobrenome){
         String regex = "\\s+";
-        sobrenome.toLowerCase();
         String snomef = sobrenome.replaceAll(regex, "");
         String Snome = snomef.substring(0, 1).toUpperCase() + snomef.substring(1);
         String min = Snome.toLowerCase();
-        String last = min.substring(0, 1).toUpperCase() + min.substring(1);
-        return last;
+        return min.substring(0, 1).toUpperCase() + min.substring(1);
     }
 }
 
