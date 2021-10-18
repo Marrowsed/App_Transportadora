@@ -20,7 +20,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.transportadora.Dados;
@@ -138,17 +137,14 @@ public class Fragmento_Cadastra_Regiao extends Fragment implements View.OnClickL
                     uf.setText("");
                 }
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError erro) {
-                erro.printStackTrace();
-                Toast.makeText(getActivity(), "CEP Inválido", Toast.LENGTH_SHORT).show();
-                regiao.setText("");
-                rua.setText("");
-                neigh.setText("");
-                city.setText("");
-                uf.setText("");
-            }
+        }, erro -> {
+            erro.printStackTrace();
+            Toast.makeText(getActivity(), "CEP Inválido", Toast.LENGTH_SHORT).show();
+            regiao.setText("");
+            rua.setText("");
+            neigh.setText("");
+            city.setText("");
+            uf.setText("");
         });
         mQueue.add(request);
 
@@ -156,7 +152,7 @@ public class Fragmento_Cadastra_Regiao extends Fragment implements View.OnClickL
 
     public void atualizaUser(String CNPJ, String volume, String regiao, String categoria){
             Boolean update = bd.atualizaPJ(CNPJ, volume, regiao, categoria);
-            if(update == true){
+            if(update){
                 Toast.makeText(getActivity(), "CNPJ validado", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), "CNPJ Inválido", Toast.LENGTH_SHORT).show();
