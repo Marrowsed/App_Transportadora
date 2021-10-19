@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ public class TAcesso extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
-    TextView home;
+    TextView home, header_usuario, header_email;
     ManipulaDB bd;
     Dados data;
 
@@ -55,6 +56,11 @@ public class TAcesso extends AppCompatActivity
 
         //Navegação pelo menu
         NavigationView navigationView = findViewById(R.id.nav_view_tacesso);
+        View headerview = navigationView.getHeaderView(0);
+        header_usuario = headerview.findViewById(R.id.header_login);
+        header_usuario.setText(data.getLogin());
+        header_email = headerview.findViewById(R.id.header_email);
+        header_email.setText(getEmail());
         navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.nav_open, R.string.nav_close);
@@ -124,5 +130,9 @@ public class TAcesso extends AppCompatActivity
             it.setData(Uri.parse(wp));
             startActivity(it);
         }
+    }
+
+    public String getEmail(){
+        return bd.getEmail(bd.getCNPJ(data.getLogin()));
     }
 }
