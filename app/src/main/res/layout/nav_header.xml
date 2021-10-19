@@ -14,6 +14,7 @@
         android:src="@drawable/ic_baseline_local_shipping_24" />
 
     <TextView
+        android:id="@+id/header_login"
         android:layout_width="119dp"
         android:layout_height="34dp"
         android:paddingTop="8dp"
@@ -21,6 +22,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
+        android:id="@+id/header_email"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:text="email@email.com"
