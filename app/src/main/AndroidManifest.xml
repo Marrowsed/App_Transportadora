@@ -21,10 +21,6 @@
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
-            android:name=".Ajuda"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity
             android:name=".TAcesso"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
