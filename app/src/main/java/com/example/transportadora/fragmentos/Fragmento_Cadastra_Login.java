@@ -82,14 +82,13 @@ public class Fragmento_Cadastra_Login extends Fragment implements View.OnClickLi
         }
 
 
-    public Boolean isUser(String user){
+    public void isUser(String user){
         Boolean checa = bd.isUser(user);
         if (!checa) {
                 Toast.makeText(getActivity(), "Usuário permitido", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), "Usuário já existente !", Toast.LENGTH_SHORT).show();
             }
-        return true;
     }
 
     public Boolean confirmaPass(String senha, String confirma){
@@ -101,7 +100,7 @@ public class Fragmento_Cadastra_Login extends Fragment implements View.OnClickLi
         }
     }
 
-    public Boolean cadastraUser(String user, String pass, String CNPJ) {
+    public void cadastraUser(String user, String pass, String CNPJ) {
         isUser(user);
         Boolean checa = bd.isUserPass(user, pass);
         if (!checa) {
@@ -113,7 +112,6 @@ public class Fragmento_Cadastra_Login extends Fragment implements View.OnClickLi
             }
         }
         bd.close();
-        return true;
     }
 
     @Override
